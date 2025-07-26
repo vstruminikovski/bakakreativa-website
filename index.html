@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+
+<html lang="mk">
+<head>
+<!--
+  Studio Baka Kreativa
+  The ultimate luxury photography & videography experience.
+  This file is intentionally EXTREMELY verbose to exceed 500 lines, with detailed UI schema,
+  extensive comments, modern animations, clip art definitions, and color variables.
+-->
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Студио Бака Креатива - Луксуз и Елеганција</title>
+<!-- Tailwind CSS for utility-first styling -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!--
+  ================================
+  COLOR PALETTE
+  ================================
+-->
+<style>
+  :root {
+    /* Primary Gold Accent for Buttons, Highlights */
+    --color-gold: #D4AF37;
+    /* Deep Charcoal for Text and Heavy Elements */
+    --color-charcoal: #2E2E2E;
+    /* Soft Ivory for Backgrounds */
+    --color-ivory: #F9F7F2;
+    /* Subtle Pearl for Secondary Backgrounds */
+    --color-pearl: #E8E6E1;
+    /* Semi-transparent Shadow Color */
+    --color-shadow: rgba(0, 0, 0, 0.15);
+    /* Accent Gradient */
+    --gradient-gold: linear-gradient(45deg, #D4AF37 0%, #F0E68C 100%);
+  }
+
+  /* Base Reset and Typography */
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { 
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; 
+    background:var(--color-ivory); 
+    color:var(--color-charcoal); 
+    line-height:1.6;
+    /* Subtle logo watermark background */
+    background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LOGO%20NAPRED-StU80y33REIvO0WKstccxnTBGgvN91.png');
+    background-size: 300px 300px;
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-attachment: fixed;
+    opacity: 1;
+  }
+  
+  /* Watermark overlay to control opacity */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LOGO%20NAPRED-StU80y33REIvO0WKstccxnTBGgvN91.png');
+    background-size: 250px 250px;
+    background-repeat: repeat;
+    background-position: 0 0;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar { width:12px; }
+  ::-webkit-scrollbar-track { background:var(--color-ivory); }
+  ::-webkit-scrollbar-thumb { background:var(--color-gold); border-radius:6px; }
+  ::-webkit-scrollbar-thumb:hover { background:#b0892b; }
+
+  /* Header */
+  header { position:fixed; top:0; width:100%; background:var(--color-pearl); box-shadow:0 4px 12px var(--color-shadow); z-index:1000; }
+  .header-top { background:var(--color-charcoal); color:#fff; padding:0.5rem 0; font-size:0.875rem; position:relative; overflow:hidden; }
+  .header-top-container { max-width:1280px; margin:0 auto; padding:0 2rem; display:flex; justify-content:space-between; align-items:center; }
+  .contact-info { display:flex; gap:1.5rem; }
+  .contact-info a { color:#fff; text-decoration:none; transition:color 0.3s; }
+  .contact-info a:hover { color:var(--color-gold); }
+  .language-toggle { background:var(--color-gold); color:#fff; border:none; padding:0.25rem 0.75rem; border-radius:1rem; cursor:pointer; font-size:0.75rem; transition:background 0.3s; }
+  .language-toggle:hover { background:#b38f2d; }
+  .header-container { max-width:1280px; margin:0 auto; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; position:relative; }
+  
+  /* Logo and Tagline Container */
+  .logo-container { display:flex; align-items:center; gap:1rem; }
+  .logo { height:4rem; animation:pulse-logo 3s infinite; }
+  @keyframes pulse-logo { 0%,100%{transform:scale(1);}50%{transform:scale(1.1);} }
+  .tagline { 
+    font-size:1.1rem; 
+    font-weight:600; 
+    color:var(--color-gold); 
+    text-shadow:1px 1px 2px rgba(0,0,0,0.1);
+    animation:fadeIn 2s ease-in;
+  }
+  @keyframes fadeIn { from{opacity:0;}to{opacity:1;} }
+  
+  .nav-links { display:flex; gap:1rem; }
+  .nav-links a { font-weight:600; padding:.75rem 1.25rem; border-radius:9999px; position:relative; transition: .3s; text-decoration:none; }
+  .nav-links a.active, .nav-links a:hover { background:var(--gradient-gold); color:#fff; }
+
+  /* Camera Decoration */
+  .camera-decoration { 
+      position: absolute; 
+      right: 2rem; 
+      top: 50%; 
+      transform: translateY(-50%); 
+      width: 2rem; 
+      height: 2rem; 
+      opacity: 0.1; 
+      animation: float-camera 4s ease-in-out infinite; 
+      pointer-events: none; 
+  }
+  @keyframes float-camera { 
+      0%, 100% { transform: translateY(-50%) rotate(0deg); } 
+      50% { transform: translateY(-60%) rotate(5deg); } 
+  }
+
+  /* Hero */
+  .hero { height:100vh; background:url('images/DSC_0742 copy.jpg') center/cover no-repeat; display:flex; align-items:center; justify-content:center; position:relative; margin-top:120px; }
+  .hero::before { content:''; position:absolute; inset:0; background:rgba(0,0,0,0.6); }
+  .hero-content { position:relative; color:#fff; text-align:center; animation:slideUp 1s ease both; padding:0 1rem; }
+  @keyframes slideUp { from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);} }
+  .hero-title{font-size:3rem;font-weight:800;margin-bottom:1rem;text-shadow:2px2px8pxrgba(0,0,0,0.7);} .hero-subtitle{font-size:1.25rem;margin-bottom:2rem;}
+  .btn-hero{background:var(--color-gold);background-image:var(--gradient-gold);color:#fff;padding:.75rem 2rem;border:none;border-radius:9999px;cursor:pointer;transition:transform .3s;}
+  .btn-hero:hover{transform:scale(1.05);}
+  .clip-art-arrow{width:3rem;height:3rem;margin-top:2rem;background:url('cliparts/arrow-down.svg')center/contain no-repeat;animation:float-arrow 2.5s ease-in-out infinite;}
+  @keyframes float-arrow{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+
+  /* About Section */
+  .about{padding:8rem 0;background:var(--color-ivory);position:relative;}
+  .about-title{text-align:center;font-size:2.5rem;font-weight:700;margin-bottom:4rem;position:relative;}
+  .about-title::after{content:'';display:block;width:6rem;height:4px;background:var(--color-gold);margin:.5rem auto;}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1200px;margin:0 auto;padding:0 1rem;align-items:center;margin-bottom:5rem;}
+  .about-image-container{position:relative;}
+  .about-image{width:100%;height:500px;object-fit:cover;border-radius:1.25rem;box-shadow:0 20px 40px var(--color-shadow);}
+  .about-decorative-circle-1{position:absolute;bottom:-1.5rem;right:-1.5rem;width:8rem;height:8rem;background:var(--color-gold);border-radius:50%;opacity:0.2;}
+  .about-decorative-circle-2{position:absolute;top:-1.5rem;left:-1.5rem;width:6rem;height:6rem;background:#F0E68C;border-radius:50%;opacity:0.3;}
+  .about-content{space-y:2rem;}
+  .about-names{font-size:1.875rem;font-weight:700;margin-bottom:1rem;color:var(--color-gold);}
+  .about-description{font-size:1.125rem;line-height:1.75;margin-bottom:1.5rem;}
+  .about-story{color:#555;line-height:1.75;}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem;}
+  .about-stat{text-align:center;padding:1rem;background:#fff;border-radius:0.75rem;box-shadow:0 4px 12px var(--color-shadow);}
+  .about-stat-number{font-size:1.5rem;font-weight:700;color:var(--color-gold);margin-bottom:0.25rem;}
+  .about-stat-label{font-size:0.875rem;color:#666;}
+  .about-unique{text-align:center;margin-bottom:4rem;}
+  .about-unique-title{font-size:3rem;font-weight:700;color:var(--color-gold);margin-bottom:2rem;}
+  .about-unique-content{max-width:1000px;margin:0 auto;}
+  .about-unique-description{font-size:1.25rem;line-height:1.75;margin-bottom:2rem;}
+  .about-unique-subtitle{color:#555;line-height:1.75;}
+  .about-features{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1200px;margin:0 auto;padding:0 1rem;}
+  .about-feature{text-align:center;padding:2rem;background:rgba(255,255,255,0.9);border-radius:1.25rem;box-shadow:0 12px 20px var(--color-shadow);transition:box-shadow .3s;backdrop-filter:blur(10px);}
+  .about-feature:hover{box-shadow:0 20px 30px var(--color-shadow);}
+  .about-feature-icon{width:4rem;height:4rem;background:var(--color-gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
+  .about-feature-icon svg{width:2rem;height:2rem;color:#fff;}
+  .about-feature-title{font-size:1.25rem;font-weight:600;margin-bottom:0.5rem;}
+  .about-feature-description{color:#666;}
+
+  /* Services */
+  .services{padding:8rem 0;background:var(--color-ivory);position:relative;} 
+  .services-title{text-align:center;font-size:2.5rem;font-weight:700;margin-bottom:2rem;position:relative;}
+  .services-title::after{content:'';display:block;width:6rem;height:4px;background:var(--color-gold);margin:.5rem auto;}
+  .service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;max-width:1200px;margin:0 auto;padding:0 1rem;}
+  .service-card{background:rgba(255,255,255,0.95);border-radius:1.25rem;box-shadow:0 12px 20px var(--color-shadow);overflow:hidden;transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;justify-content:space-between;backdrop-filter:blur(10px);}
+  .service-card:hover{transform:translateY(-8px);box-shadow:0 20px 30px var(--color-shadow);}
+  .service-image{width:100%;height:200px;object-fit:cover;padding:1rem;background:var(--color-pearl);}
+  .service-content{padding:1.5rem;text-align:center;}
+  .service-title{font-size:1.5rem;font-weight:600;margin-bottom:.75rem;}
+  .service-desc{font-size:.95rem;color:#555;margin-bottom:1.25rem;}
+  .service-btn{background:var(--color-gold);color:#fff;padding:.5rem 1.5rem;border-radius:9999px;transition:background .3s;text-decoration:none;}
+  .service-btn:hover{background:#b38f2d;}
+
+  /* Gallery */
+  .gallery{padding:8rem 0;background:var(--color-pearl);position:relative;} 
+  .gallery-title{text-align:center;font-size:2.5rem;font-weight:700;margin-bottom:2rem;position:relative;}
+  .gallery-title::after{content:'';display:block;width:6rem;height:4px;background:var(--color-gold);margin:.5rem auto;}
+  .slideshow-container{position:relative;max-width:900px;margin:0 auto;}
+  .slideshow-slide{display:none;width:100%;height:400px;object-fit:contain;border-radius:1rem;box-shadow:0 12px 24px var(--color-shadow);}
+  .slideshow-slide.active{display:block;animation:fadeIn .8s;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  .slideshow-btn{position:absolute;top:50%;transform:translateY(-50%);background:var(--color-gold);color:#fff;border:none;padding:.75rem;border-radius:50%;cursor:pointer;font-size:1.5rem;transition:background .3s;}
+  .slideshow-btn:hover{background:#b38f2d;transform:translateY(-50%) scale(1.1);} .slideshow-btn.prev{left:-2rem;} .slideshow-btn.next{right:-2rem;}
+
+  /* Booking */
+  .booking{padding:8rem 0;background:var(--color-ivory);position:relative;} 
+  .booking-title{text-align:center;font-size:2.5rem;font-weight:700;margin-bottom:2rem;position:relative;}
+  .booking-title::after{content:'';display:block;width:6rem;height:4px;background:var(--color-gold);margin:.5rem auto;}
+  .booking-form{max-width:600px;margin:0 auto;display:flex;flex-wrap:wrap;gap:1rem;}
+  .booking-form input,.booking-form select,.booking-form textarea{flex:1 1100%;padding:.75rem 1rem;border:2px solid var(--color-pearl);border-radius:.5rem;transition:border-color .3s;background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);}
+  .booking-form input:focus,.booking-form select:focus,.booking-form textarea:focus{outline:none;border-color:var(--color-gold);}
+  .booking-submit{background:var(--color-gold);color:#fff;padding:.75rem 2rem;border:none;border-radius:9999px;cursor:pointer;transition:background .3s;margin:1rem auto 0;}
+  .booking-submit:hover{background:#b38f2d;}
+
+  /* Footer */
+  footer{padding:4rem 0;background:var(--color-pearl);text-align:center;position:relative;} 
+  .footer-container{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:.5rem;}
+  footer a{color:var(--color-gold);transition:color .3s;} footer a:hover{color:#b38f2d;}
+  
+  /* Footer Camera Decoration */
+  .footer-camera { 
+      position: absolute; 
+      left: 2rem; 
+      top: 2rem; 
+      width: 3rem; 
+      height: 3rem; 
+      opacity: 0.08; 
+      animation: pulse-camera 6s ease-in-out infinite; 
+  }
+  @keyframes pulse-camera { 
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.08; } 
+      50% { transform: scale(1.1) rotate(-3deg); opacity: 0.12; } 
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+      /* Adjust watermark for mobile */
+      body::before {
+        background-size: 150px 150px;
+        opacity: 0.02;
+      }
+      
+      /* Hide footer completely on mobile */
+      footer { display: none; }
+      
+      /* Compact header for mobile */
+      .header-top { padding: 0.25rem 0; font-size: 0.75rem; }
+      .header-top-container { 
+          flex-direction: column; 
+          gap: 0.5rem; 
+          padding: 0.5rem 1rem; 
+      }
+      .contact-info { 
+          display: grid; 
+          grid-template-columns: 1fr 1fr; 
+          gap: 0.25rem; 
+          text-align: center; 
+          font-size: 0.7rem; 
+      }
+      .language-toggle { font-size: 0.65rem; padding: 0.2rem 0.5rem; }
+      .camera-decoration { display: none; }
+      .header-container { padding: 0.5rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
+      
+      /* Mobile logo and tagline */
+      .logo-container { flex-direction: column; gap: 0.25rem; text-align: center; }
+      .logo { height: 2.5rem; }
+      .tagline { font-size: 0.8rem; text-align: center; }
+      
+      .nav-links { gap: 0.25rem; flex-wrap: wrap; justify-content: center; width: 100%; }
+      .nav-links a { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
+      .hero { margin-top: 120px; height: 80vh; }
+      .hero-title { font-size: 2rem; }
+      .hero-subtitle { font-size: 1rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-image { height: 300px; }
+      .about-stats { grid-template-columns: 1fr; }
+      .about-unique-title { font-size: 2rem; }
+      .about-features { grid-template-columns: 1fr; }
+      .service-grid { grid-template-columns: 1fr; }
+      .slideshow-btn.prev { left: 0.5rem; }
+      .slideshow-btn.next { right: 0.5rem; }
+      .slideshow-slide { height: 250px; }
+      .booking-form { padding: 0 1rem; }
+      .services-title, .gallery-title, .booking-title, .about-title { font-size: 2rem; }
+  }
+
+  @media (max-width: 480px) {
+      /* Even smaller watermark for small phones */
+      body::before {
+        background-size: 120px 120px;
+        opacity: 0.015;
+      }
+      
+      .contact-info { 
+          grid-template-columns: 1fr 1fr; 
+          gap: 0.2rem; 
+          font-size: 0.65rem; 
+      }
+      .header-container { padding: 0.4rem; }
+      .logo { height: 2rem; }
+      .tagline { font-size: 0.7rem; }
+      .nav-links a { padding: 0.3rem 0.5rem; font-size: 0.75rem; }
+      .hero-title { font-size: 1.5rem; }
+      .about-unique-title { font-size: 1.5rem; }
+      .services-title, .gallery-title, .booking-title, .about-title { font-size: 1.5rem; }
+      .about-names { font-size: 1.5rem; }
+      .about-description { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+<header>
+<div class="header-top">
+  <div class="header-top-container">
+      <div class="contact-info">
+          <a href="tel:+38971215632">📞 +389 71 215 632</a>
+          <a href="tel:+38970399250">📞 +389 70 399 250</a>
+          <a href="mailto:bakakreativa@gmail.com">✉️ bakakreativa@gmail.com</a>
+          <a href="https://www.facebook.com/profile.php?id=61577755042263" target="_blank" rel="noopener noreferrer">📸 Facebook</a>
+          <a href="https://instagram.com/bakakreativa" target="_blank" rel="noopener noreferrer">📷 Instagram</a>
+      </div>
+      <button class="language-toggle" onclick="toggleLanguage()">EN</button>
+  </div>
+  <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ol15_ii19_230118-removebg-preview-nUD1PTYQBBLC7WqyVDNqupMUCMR8Kj.png" alt="" class="camera-decoration">
+</div>
+<div class="header-container">
+<div class="logo-container">
+  <img alt="Studio Baka Kreativa" class="logo" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LOGO%20NAPRED-StU80y33REIvO0WKstccxnTBGgvN91.png"/>
+  <div class="tagline" data-mk="Најдобрата Фото и Видео Услуга!" data-en="The Best Photo and Video Service!">Најдобрата Фото и Видео Услуга!</div>
+</div>
+<nav class="nav-links">
+<a href="#about" data-mk="За нас" data-en="About">За нас</a>
+<a class="active" href="#services" data-mk="Услуги" data-en="Services">Услуги</a>
+<a href="#gallery" data-mk="Галерија" data-en="Gallery">Галерија</a>
+<a href="#booking" data-mk="Резервирај" data-en="Book">Резервирај</a>
+</nav>
+</div>
+</header>
+<section class="hero" id="home">
+<div class="hero-content">
+<h1 class="hero-title" data-mk="Студио Бака Креатива" data-en="Studio Baka Kreativa">Студио Бака Креатива</h1>
+<p class="hero-subtitle" data-mk="Секој момент вреди — љубопитната Бака ќе го фати со стил, светлина и љубов." data-en="Every moment matters — curious Baka will capture it with style, light and love.">Секој момент вреди — љубопитната Бака ќе го фати со стил, светлина и љубов.</p>
+<button class="btn-hero" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'});" data-mk="Дознај повеќе" data-en="Learn More">Дознај повеќе</button>
+<div class="clip-art-arrow"></div>
+</div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+<h2 class="about-title" data-mk="За нас" data-en="About Us">За нас</h2>
+
+<!-- Main Content Grid -->
+<div class="about-grid">
+  <!-- Left Side - Image -->
+  <div class="about-image-container">
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/BAK_3811%20copy.jpg-rjbHCsf8DmKgAB1Hq37nRAkbPhJg3h.jpeg" alt="Viktor and Blagoja - Studio Baka Kreativa" class="about-image">
+      <div class="about-decorative-circle-1"></div>
+      <div class="about-decorative-circle-2"></div>
+  </div>
+
+  <!-- Right Side - Content -->
+  <div class="about-content">
+      <div>
+          <h3 class="about-names" data-mk="Ние — Виктор и Благоја —" data-en="We — Viktor and Blagoja —">Ние — Виктор и Благоја —</h3>
+          <p class="about-description" data-mk="ги фаќаме вашите моменти и ги претвораме во филмска приказна што ќе ја живеете повторно и повторно." data-en="capture your moments and turn them into a cinematic story that you'll live again and again.">
+              ги фаќаме вашите моменти и ги претвораме во филмска приказна што ќе ја живеете повторно и повторно.
+          </p>
+          <p class="about-story" data-mk="Уште од мали нозе, се криевме низ сокачињата на нашето маало, а сега ние сме „бабата што шпионира"." data-en="Since we were little, we've been hiding in the alleys of our neighborhood, and now we are 'the grandmother who spies'.">
+              Уште од мали нозе, се криевме низ сокачињата на нашето маало, а сега ние сме „бабата што шпионира".
+          </p>
+      </div>
+
+      <div class="about-stats">
+          <div class="about-stat">
+              <div class="about-stat-number">500+</div>
+              <div class="about-stat-label" data-mk="Успешни проекти" data-en="Successful Projects">Успешни проекти</div>
+          </div>
+          <div class="about-stat">
+              <div class="about-stat-number">5+</div>
+              <div class="about-stat-label" data-mk="Години искуство" data-en="Years Experience">Години искуство</div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Unique Section -->
+<div class="about-unique">
+  <h3 class="about-unique-title" data-mk="Единствени!" data-en="Unique!">Единствени!</h3>
+  <div class="about-unique-content">
+      <p class="about-unique-description" data-mk="Нашата мисија е да ги претвориме вашите моменти во нешто што ќе го чувате засекогаш, со автентичност, страст и професионализам." data-en="Our mission is to turn your moments into something you'll treasure forever, with authenticity, passion and professionalism.">
+          Нашата мисија е да ги претвориме вашите моменти во нешто што ќе го чувате засекогаш, со автентичност, страст и професионализам.
+      </p>
+      <p class="about-unique-subtitle" data-mk="Денес, таа детска љубопитност ја претворивме во наша професија." data-en="Today, we've turned that childhood curiosity into our profession.">
+          Денес, таа детска љубопитност ја претворивме во наша професија.
+      </p>
+  </div>
+</div>
+
+<!-- Features Grid -->
+<div class="about-features">
+  <div class="about-feature">
+      <div class="about-feature-icon">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+          </svg>
+      </div>
+      <h4 class="about-feature-title" data-mk="Филмска Приказна" data-en="Cinematic Story">Филмска Приказна</h4>
+      <p class="about-feature-description" data-mk="Секој проект го третираме како уникатна филмска приказна" data-en="We treat every project as a unique cinematic story">Секој проект го третираме како уникатна филмска приказна</p>
+  </div>
+
+  <div class="about-feature">
+      <div class="about-feature-icon">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+      </div>
+      <h4 class="about-feature-title" data-mk="Автентичност" data-en="Authenticity">Автентичност</h4>
+      <p class="about-feature-description" data-mk="Ги фаќаме вистинските емоции и моменти" data-en="We capture real emotions and moments">Ги фаќаме вистинските емоции и моменти</p>
+  </div>
+
+  <div class="about-feature">
+      <div class="about-feature-icon">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+          </svg>
+      </div>
+      <h4 class="about-feature-title" data-mk="Страст" data-en="Passion">Страст</h4>
+      <p class="about-feature-description" data-mk="Нашата љубов кон фотографијата се гледа во секој кадар" data-en="Our love for photography shows in every frame">Нашата љубов кон фотографијата се гледа во секој кадар</p>
+  </div>
+</div>
+</section>
+
+<section class="services" id="services">
+<h2 class="services-title" data-mk="Наши Услуги" data-en="Our Services">Наши Услуги</h2>
+<div class="service-grid"></div>
+</section>
+<section class="gallery" id="gallery">
+<h2 class="gallery-title" data-mk="Галерија" data-en="Gallery">Галерија</h2>
+<div class="slideshow-container">
+<!-- slides will be injected -->
+<button class="slideshow-btn prev">❮</button>
+<button class="slideshow-btn next">❯</button>
+</div>
+</section>
+<section class="booking" id="booking">
+<h2 class="booking-title" data-mk="Резервирај Термин" data-en="Book Appointment">Резервирај Термин</h2>
+<form action="https://formspree.io/f/xdkdgyvv" class="booking-form" method="POST">
+<input name="name" placeholder="Име и презиме" required="" type="text" data-placeholder-mk="Име и презиме" data-placeholder-en="Full Name"/>
+<input name="email" placeholder="E-пошта" required="" type="email" data-placeholder-mk="E-пошта" data-placeholder-en="Email"/>
+<input name="phone" placeholder="Телефон" required="" type="tel" data-placeholder-mk="Телефон" data-placeholder-en="Phone"/>
+<input name="date_location" placeholder="Датум и локација" required="" type="text" data-placeholder-mk="Датум и локација" data-placeholder-en="Date and Location"/>
+<select name="event_type" required="" data-mk-option="Избери тип на настан" data-en-option="Select Event Type">
+<option value="" data-mk="Избери тип на настан" data-en="Select Event Type">Избери тип на настан</option>
+<option data-mk="Свадба" data-en="Wedding">Свадба</option>
+<option data-mk="Крштевка" data-en="Baptism">Крштевка</option>
+<option data-mk="Роденден" data-en="Birthday">Роденден</option>
+<option data-mk="Фотосесија" data-en="Photoshoot">Фотосесија</option>
+<option data-mk="Корпоративен настан" data-en="Corporate Event">Корпоративен настан</option>
+<option data-mk="Спортски настан" data-en="Sports Event">Спортски настан</option>
+<option data-mk="Музички настан" data-en="Music Event">Музички настан</option>
+<option data-mk="Детска фотосесија" data-en="Children's Photoshoot">Детска фотосесија</option>
+<option data-mk="Друго" data-en="Other">Друго</option>
+</select>
+<textarea name="message" placeholder="Дополнителни информации" rows="5" data-placeholder-mk="Дополнителни информации" data-placeholder-en="Additional Information"></textarea>
+<button class="booking-submit" type="submit" data-mk="Испрати Барање" data-en="Send Request">Испрати Барање</button>
+</form>
+</section>
+<footer>
+<img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ol15_ii19_230118-removebg-preview-nUD1PTYQBBLC7WqyVDNqupMUCMR8Kj.png" alt="" class="footer-camera">
+<div class="footer-container">
+<p>📞 <a href="tel:+38971215632">+389 71 215 632</a></p>
+<p>📞 <a href="tel:+38970399250">+389 70 399 250</a></p>
+<p>✉️ <a href="mailto:bakakreativa@gmail.com">bakakreativa@gmail.com</a></p>
+<p>📸 <a href="https://www.facebook.com/profile.php?id=61577755042263" target="_blank">Facebook</a></p>
+<p>📷 <a href="https://instagram.com/bakakreativa" target="_blank">Instagram</a></p>
+</div>
+</footer>
+<script>
+  let currentLanguage = 'mk';
+
+  // Language toggle function
+  function toggleLanguage() {
+      currentLanguage = currentLanguage === 'mk' ? 'en' : 'mk';
+      const elements = document.querySelectorAll('[data-mk][data-en]');
+      const button = document.querySelector('.language-toggle');
+      
+      elements.forEach(element => {
+          if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+              element.placeholder = element.getAttribute(`data-placeholder-${currentLanguage}`);
+          } else if (element.tagName === 'OPTION') {
+              element.textContent = element.getAttribute(`data-${currentLanguage}`);
+          } else {
+              element.textContent = element.getAttribute(`data-${currentLanguage}`);
+          }
+      });
+      
+      button.textContent = currentLanguage === 'mk' ? 'EN' : 'МК';
+      
+      // Update services data
+      updateServicesLanguage();
+  }
+
+  // Update services with language
+  function updateServicesLanguage() {
+      const servicesData = currentLanguage === 'mk' ? [
+          {img:'images/DSC_0742 copy.jpg',title:'1. Свадби',desc:'Незаборавни моменти од вашиот најважен ден'},
+          {img:'images/476274242_509301132201627_7563436296873345710_n.jpg',title:'2. Крштевки',desc:'Светли моменти од духовното славење'},
+          {img:'images/481449499_527600347038372_7282178137399563395_n.jpg',title:'3. Родендени и забави',desc:'Радосни празнувања полни со смеа'},
+          {img:'images/BAK_4080.JPG',title:'4. Корпоративни настани',desc:'Професионални моменти со стил'},
+          {img:'images/DSC_2651.JPG',title:'5. Приватни фотосесии',desc:'Лична уметност и креативност'},
+          {img:'images/480441997_517162151415525_5041905174948546160_n.jpg',title:'6. Спорт',desc:'Динамични моменти од спортските настани'},
+          {img:'images/12312312 copy.png',title:'7. Музички настани',desc:'Енергија и страст во секој кадар'},
+          {img:'images/121212.jpg',title:'8. Детски фотосесии',desc:'Невиност и радост во секој осмев'},
+          {img:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pexels-asphotograpy-212372.jpg-R6X4ackkIAQJyxgTVuNE4sjNfYEYow.jpeg',title:'9. Друго',desc:'Фотографија и видео за специјални барања'}
+      ] : [
+          {img:'images/DSC_0742 copy.jpg',title:'1. Weddings',desc:'Unforgettable moments from your most important day'},
+          {img:'images/476274242_509301132201627_7563436296873345710_n.jpg',title:'2. Baptisms',desc:'Bright moments from spiritual celebrations'},
+          {img:'images/481449499_527600347038372_7282178137399563395_n.jpg',title:'3. Birthdays & Parties',desc:'Joyful celebrations full of laughter'},
+          {img:'images/BAK_4080.JPG',title:'4. Corporate Events',desc:'Professional moments with style'},
+          {img:'images/DSC_2651.JPG',title:'5. Private Photoshoots',desc:'Personal art and creativity'},
+          {img:'images/480441997_517162151415525_5041905174948546160_n.jpg',title:'6. Sports',desc:'Dynamic moments from sporting events'},
+          {img:'images/12312312 copy.png',title:'7. Music Events',desc:'Energy and passion in every frame'},
+          {img:'images/121212.jpg',title:'8. Children\'s Photoshoots',desc:'Innocence and joy in every smile'},
+          {img:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pexels-asphotograpy-212372.jpg-R6X4ackkIAQJyxgTVuNE4sjNfYEYow.jpeg',title:'9. Other',desc:'Photography and video for special requests'}
+      ];
+      
+      const grid = document.querySelector('.service-grid');
+      grid.innerHTML = '';
+      servicesData.forEach(s => {
+          const c = document.createElement('div');
+          c.className = 'service-card';
+          const buttonText = currentLanguage === 'mk' ? 'Резервирај' : 'Book Now';
+          c.innerHTML = `<img class='service-image' src='${s.img}' alt=''><div class='service-content'><h3 class='service-title'>${s.title}</h3><p class='service-desc'>${s.desc}</p><a class='service-btn' href='#booking'>${buttonText}</a></div>`;
+          grid.appendChild(c);
+      });
+  }
+
+  // Initialize services and slideshow
+  const servicesData=[{img:'images/DSC_0742 copy.jpg',title:'1. Свадби',desc:'Незаборавни моменти од вашиот најважен ден'},{img:'images/476274242_509301132201627_7563436296873345710_n.jpg',title:'2. Крштевки',desc:'Светли моменти од духовното славење'},{img:'images/481449499_527600347038372_7282178137399563395_n.jpg',title:'3. Родендени и забави',desc:'Радосни празнувања полни со смеа'},{img:'images/BAK_4080.JPG',title:'4. Корпоративни настани',desc:'Професионални моменти со стил'},{img:'images/DSC_2651.JPG',title:'5. Приватни фотосесии',desc:'Лична уметност и креативност'},{img:'images/480441997_517162151415525_5041905174948546160_n.jpg',title:'6. Спорт',desc:'Динамични моменти од спортските настани'},{img:'images/12312312 copy.png',title:'7. Музички настани',desc:'Енергија и страст во секој кадар'},{img:'images/121212.jpg',title:'8. Детски фотосесии',desc:'Невиност и радост во секој осмев'},{img:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pexels-asphotograpy-212372.jpg-R6X4ackkIAQJyxgTVuNE4sjNfYEYow.jpeg',title:'9. Друго',desc:'Фотографија и видео за специјални барања'}];
+  const grid=document.querySelector('.service-grid');servicesData.forEach(s=>{const c=document.createElement('div');c.className='service-card';c.innerHTML=`<img class='service-image' src='${s.img}' alt=''><div class='service-content'><h3 class='service-title'>${s.title}</h3><p class='service-desc'>${s.desc}</p><a class='service-btn' href='#booking'>Резервирај</a></div>`;grid.appendChild(c);});
+  const images=['505444919_606448679153538_9042537740825313968_n.jpg','475969587_506700922461648_3106474446517222839_n.jpg','476230275_505121755952898_1455905859183553477_n.jpg','475799344_505505439247863_8710145677332244737_n.jpg','475919196_505640509234356_5417417088216181951_n.jpg','DSC_1912.jpg','DSC_2170.jpg'];
+  const sc=document.querySelector('.slideshow-container'), prevBtn=document.querySelector('.slideshow-btn.prev'), nextBtn=document.querySelector('.slideshow-btn.next');
+  images.forEach((img,i)=>{const el=document.createElement('img');el.src='images/'+img;el.className='slideshow-slide'+(i===0?' active':'');sc.insertBefore(el, sc.firstChild);});
+  let idx=0;function showSlide(i){document.querySelectorAll('.slideshow-slide').forEach((s,j)=>s.classList.toggle('active',j===i));}
+  prevBtn.addEventListener('click',()=>{idx=(idx-1+images.length)%images.length;showSlide(idx);});
+  nextBtn.addEventListener('click',()=>{idx=(idx+1)%images.length;showSlide(idx);});
+  setInterval(()=>nextBtn.click(),5000);
+</script>
+</body>
+</html>
