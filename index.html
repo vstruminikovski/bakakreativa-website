@@ -470,6 +470,50 @@
 <p>📷 <a href="https://instagram.com/bakakreativa" target="_blank">Instagram</a></p>
 </div>
 </footer>
+<!-- ============ BACKGROUND MUSIC & MUTE BUTTON ============ -->
+<audio id="bg-music" src="private/chopin-nocturne.mp3" autoplay loop></audio>
+<button id="music-mute-btn"
+  style="
+    position: fixed;
+    z-index: 2000;
+    right: 2rem;
+    bottom: 2rem;
+    background: var(--color-gold, #D4AF37);
+    color: #fff;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.9rem 1.6rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.16);
+    cursor: pointer;
+    transition: background 0.2s;
+    outline: none;
+  "
+  aria-label="Mute or unmute background music">
+  🔊 Mute Music
+</button>
+<script>
+  const audio = document.getElementById('bg-music');
+  audio.volume = 0.38;
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      if (audio.paused) {
+        audio.play().catch(()=>{});
+      }
+    }, 400);
+  });
+  const btn = document.getElementById('music-mute-btn');
+  function updateBtn() {
+    btn.innerHTML = audio.muted ? "🔇 Unmute Music" : "🔊 Mute Music";
+  }
+  btn.onclick = () => {
+    audio.muted = !audio.muted;
+    updateBtn();
+  };
+  updateBtn();
+</script>
+<!-- ======================================================= -->
 <script>
   let currentLanguage = 'mk';
 
