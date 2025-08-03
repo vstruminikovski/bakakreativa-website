@@ -324,10 +324,11 @@
   <div class="tagline" data-mk="Најдобрата Фото и Видео Услуга!" data-en="The Best Photo and Video Service!">Најдобрата Фото и Видео Услуга!</div>
 </div>
 <nav class="nav-links">
-<a href="#about" data-mk="За нас" data-en="About">За нас</a>
-<a class="active" href="#services" data-mk="Услуги" data-en="Services">Услуги</a>
-<a href="#gallery" data-mk="Галерија" data-en="Gallery">Галерија</a>
-<a href="#booking" data-mk="Резервирај" data-en="Book">Резервирај</a>
+<nav class="nav-links">
+  <a href="#about" data-mk="За нас" data-en="About">За нас</a>
+  <a href="#services" data-mk="Услуги" data-en="Services">Услуги</a>
+  <a href="#gallery" data-mk="Галерија" data-en="Gallery">Галерија</a>
+  <a href="#booking" data-mk="Резервирај" data-en="Book">Резервирај</a>
 </nav>
 </div>
 </header>
@@ -392,17 +393,13 @@
 </div>
 
 <!-- Features Grid -->
-<div class="about-features">
-  <div class="about-feature">
-      <div class="about-feature-icon">
-          <svg fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
-          </svg>
-      </div>
-      <h4 class="about-feature-title" data-mk="Филмска Приказна" data-en="Cinematic Story">Филмска Приказна</h4>
-      <p class="about-feature-description" data-mk="Секој проект го третираме како уникатна филмска приказна" data-en="We treat every project as a unique cinematic story">Секој проект го третираме како уникатна филмска приказна</p>
-  </div>
-
+<div class="about-feature">
+    <div class="about-feature-icon" style="background:transparent;">
+        <img src="download.png" alt="Authenticity Badge" style="width: 2.5rem; height: 2.5rem; display:block; margin:0 auto;"/>
+    </div>
+    <h4 class="about-feature-title" data-mk="Автентичност" data-en="Authenticity">Автентичност</h4>
+    <p class="about-feature-description" data-mk="Ги фаќаме вистинските емоции и моменти" data-en="We capture real emotions and moments">Ги фаќаме вистинските емоции и моменти</p>
+</div>
   <div class="about-feature">
       <div class="about-feature-icon">
           <svg fill="currentColor" viewBox="0 0 20 20">
@@ -663,5 +660,39 @@
   nextBtn.addEventListener('click',()=>{idx=(idx+1)%images.length;showSlide(idx);});
   setInterval(()=>nextBtn.click(),5000);
 </script>
+ // Dynamic nav highlight based on scroll position
+      document.addEventListener('DOMContentLoaded', function () {
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sectionIds = ['about', 'services', 'gallery', 'booking'];
+        const sections = sectionIds.map(id => document.getElementById(id));
+
+        function activateNav(idx) {
+          navLinks.forEach((link, i) => {
+            if (i === idx) link.classList.add('active');
+            else link.classList.remove('active');
+          });
+        }
+
+        // Highlight correct nav tab when scrolling
+        const observer = new IntersectionObserver((entries) => {
+          let idx = 0;
+          entries.forEach((entry, i) => {
+            if (entry.isIntersecting) idx = sectionIds.indexOf(entry.target.id);
+          });
+          activateNav(idx);
+        }, {
+          threshold: 0.5
+        });
+
+        sections.forEach(section => {
+          if (section) observer.observe(section);
+        });
+
+        // Also activate on nav click (smooth scroll, update immediately)
+        navLinks.forEach((link, i) => {
+          link.addEventListener('click', () => activateNav(i));
+        });
+      });
+    </script>
 </body>
 </html>
