@@ -473,7 +473,7 @@
 <!-- ============ BACKGROUND MUSIC & MUTE BUTTON ============ -->
 <audio id="bg-music"
   src="https://wllzzipkmorgttze.public.blob.vercel-storage.com/chopin-nocturne.mp3"
-  autoplay loop></audio>
+  autoplay loop muted></audio>
 <button id="music-mute-btn"
   style="
     position: fixed;
@@ -497,27 +497,40 @@
     padding: 0;
   "
   aria-label="Mute/unmute music">
-  🔊
+  🔇
 </button>
 <script>
   const audio = document.getElementById('bg-music');
   audio.volume = 0.38;
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      if (audio.paused) {
-        audio.play().catch(()=>{});
-      }
-    }, 400);
-  });
   const btn = document.getElementById('music-mute-btn');
   function updateBtn() {
     btn.innerHTML = audio.muted ? "🔇" : "🔊";
   }
-  btn.onclick = () => {
+  btn.onclick = (e) => {
     audio.muted = !audio.muted;
+    if (!audio.paused) audio.play().catch(()=>{});
     updateBtn();
+    e.stopPropagation();
   };
   updateBtn();
+
+  // Play and unmute on first interaction with the page (not the button)
+  let activated = false;
+  function activateMusic() {
+    if (!activated) {
+      audio.muted = false;
+      audio.play().catch(()=>{});
+      updateBtn();
+      activated = true;
+      // Only run once
+      window.removeEventListener('click', activateMusic, true);
+      window.removeEventListener('keydown', activateMusic, true);
+      window.removeEventListener('touchstart', activateMusic, true);
+    }
+  }
+  window.addEventListener('click', activateMusic, true);
+  window.addEventListener('keydown', activateMusic, true);
+  window.addEventListener('touchstart', activateMusic, true);
 </script>
 <!-- ======================================================= -->
 <script>
