@@ -393,31 +393,36 @@
 </div>
 
 <!-- Features Grid -->
-<div class="about-feature">
+<div class="about-features">
+  <!-- 1. Cinematic Story -->
+  <div class="about-feature">
+    <div class="about-feature-icon">
+      <svg fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M4 3a2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+      </svg>
+    </div>
+    <h4 class="about-feature-title" data-mk="Филмска Приказна" data-en="Cinematic Story">Филмска Приказна</h4>
+    <p class="about-feature-description" data-mk="Секој проект го третираме како уникатна филмска приказна" data-en="We treat every project as a unique cinematic story">Секој проект го третираме како уникатна филмска приказна</p>
+  </div>
+
+  <!-- 2. Authenticity (with image tick) -->
+  <div class="about-feature">
     <div class="about-feature-icon" style="background:transparent;">
-        <img src="download.png" alt="Authenticity Badge" style="width: 2.5rem; height: 2.5rem; display:block; margin:0 auto;"/>
+      <img src="download.png" alt="Authenticity Tick" style="width:2.5rem;height:2.5rem;display:block;margin:0 auto;"/>
     </div>
     <h4 class="about-feature-title" data-mk="Автентичност" data-en="Authenticity">Автентичност</h4>
     <p class="about-feature-description" data-mk="Ги фаќаме вистинските емоции и моменти" data-en="We capture real emotions and moments">Ги фаќаме вистинските емоции и моменти</p>
-</div>
-  <div class="about-feature">
-      <div class="about-feature-icon">
-          <svg fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-      </div>
-      <h4 class="about-feature-title" data-mk="Автентичност" data-en="Authenticity">Автентичност</h4>
-      <p class="about-feature-description" data-mk="Ги фаќаме вистинските емоции и моменти" data-en="We capture real emotions and moments">Ги фаќаме вистинските емоции и моменти</p>
   </div>
 
+  <!-- 3. Passion -->
   <div class="about-feature">
-      <div class="about-feature-icon">
-          <svg fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
-          </svg>
-      </div>
-      <h4 class="about-feature-title" data-mk="Страст" data-en="Passion">Страст</h4>
-      <p class="about-feature-description" data-mk="Нашата љубов кон фотографијата се гледа во секој кадар" data-en="Our love for photography shows in every frame">Нашата љубов кон фотографијата се гледа во секој кадар</p>
+    <div class="about-feature-icon">
+      <svg fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+      </svg>
+    </div>
+    <h4 class="about-feature-title" data-mk="Страст" data-en="Passion">Страст</h4>
+    <p class="about-feature-description" data-mk="Нашата љубов кон фотографијата се гледа во секој кадар" data-en="Our love for photography shows in every frame">Нашата љубов кон фотографијата се гледа во секој кадар</p>
   </div>
 </div>
 </section>
@@ -659,40 +664,42 @@
   prevBtn.addEventListener('click',()=>{idx=(idx-1+images.length)%images.length;showSlide(idx);});
   nextBtn.addEventListener('click',()=>{idx=(idx+1)%images.length;showSlide(idx);});
   setInterval(()=>nextBtn.click(),5000);
-</script>
- // Dynamic nav highlight based on scroll position
-      document.addEventListener('DOMContentLoaded', function () {
-        const navLinks = document.querySelectorAll('.nav-links a');
-        const sectionIds = ['about', 'services', 'gallery', 'booking'];
-        const sections = sectionIds.map(id => document.getElementById(id));
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sectionIds = ['about', 'services', 'gallery', 'booking'];
+  const sections = sectionIds.map(id => document.getElementById(id));
 
-        function activateNav(idx) {
-          navLinks.forEach((link, i) => {
-            if (i === idx) link.classList.add('active');
-            else link.classList.remove('active');
-          });
-        }
+  function highlightNav() {
+    let current = 0;
+    const scrollPos = window.scrollY + 110; // offset for fixed header
+    for (let i = 0; i < sections.length; i++) {
+      if (sections[i] && sections[i].offsetTop <= scrollPos) {
+        current = i;
+      }
+    }
+    navLinks.forEach((link, idx) => {
+      if (idx === current) link.classList.add('active');
+      else link.classList.remove('active');
+    });
+  }
 
-        // Highlight correct nav tab when scrolling
-        const observer = new IntersectionObserver((entries) => {
-          let idx = 0;
-          entries.forEach((entry, i) => {
-            if (entry.isIntersecting) idx = sectionIds.indexOf(entry.target.id);
-          });
-          activateNav(idx);
-        }, {
-          threshold: 0.5
-        });
+  window.addEventListener('scroll', highlightNav, { passive: true });
 
-        sections.forEach(section => {
-          if (section) observer.observe(section);
-        });
-
-        // Also activate on nav click (smooth scroll, update immediately)
-        navLinks.forEach((link, i) => {
-          link.addEventListener('click', () => activateNav(i));
-        });
+  // On click, highlight instantly and scroll smoothly
+  navLinks.forEach((link, idx) => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      sections[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      navLinks.forEach((l, i) => {
+        if (i === idx) l.classList.add('active');
+        else l.classList.remove('active');
       });
-    </script>
+    });
+  });
+
+  highlightNav();
+});
+</script>
 </body>
 </html>
