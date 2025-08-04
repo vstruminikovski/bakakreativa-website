@@ -321,6 +321,14 @@
 <div class="header-container">
 <div class="logo-container">
   <img alt="Studio Baka Kreativa" class="logo" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LOGO%20NAPRED-StU80y33REIvO0WKstccxnTBGgvN91.png"/>
+<script>
+document.querySelectorAll('a.logo-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('about').scrollIntoView({behavior: 'smooth', block: 'start'});
+  });
+});
+</script>
   <div class="tagline" data-mk="Најдобрата Фото и Видео Услуга!" data-en="The Best Photo and Video Service!">Најдобрата Фото и Видео Услуга!</div>
 </div>
 <nav class="nav-links">
