@@ -663,5 +663,43 @@
   nextBtn.addEventListener('click',()=>{idx=(idx+1)%images.length;showSlide(idx);});
   setInterval(()=>nextBtn.click(),5000);
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Navigation links and section IDs in order
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sectionIds = ['about', 'services', 'gallery', 'booking'];
+  const sections = sectionIds.map(id => document.getElementById(id));
+
+  // Highlight correct nav tab based on scroll
+  function highlightNav() {
+    let current = 0;
+    const scrollPos = window.scrollY + 130; // adjust 130px for header height
+    for (let i = 0; i < sections.length; i++) {
+      if (sections[i] && sections[i].offsetTop <= scrollPos) {
+        current = i;
+      }
+    }
+    navLinks.forEach((link, idx) => {
+      if (idx === current) link.classList.add('active');
+      else link.classList.remove('active');
+    });
+  }
+
+  // On scroll
+  window.addEventListener('scroll', highlightNav, { passive: true });
+  // On page load
+  highlightNav();
+
+  // On nav click: scroll and highlight instantly
+  navLinks.forEach((link, idx) => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      sections[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Instant highlight for UX
+      navLinks.forEach((l, i) => l.classList.toggle('active', i === idx));
+    });
+  });
+});
+</script>
 </body>
 </html>
