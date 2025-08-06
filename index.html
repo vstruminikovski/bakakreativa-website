@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="mk">
 <head>
 <!--
@@ -42,6 +41,7 @@
     --color-shadow: rgba(0, 0, 0, 0.15);
     /* Accent Gradient */
     --gradient-gold: linear-gradient(45deg, #D4AF37 0%, #F0E68C 100%);
+  }
 @media (min-width: 700px) {
 .header-container {
   display: flex;
@@ -57,6 +57,7 @@
   backdrop-filter: blur(4px);                 /* <--- optional, modern glass effect */
   -webkit-backdrop-filter: blur(4px);         /* Safari support */
   transition: background 0.25s;
+}
 body.menu-open {
   overflow: hidden;
   position: fixed;
@@ -102,7 +103,6 @@ html, body { max-width: 100vw; overflow-x: hidden !important; }
 
 /* The sidebar nav itself */
 .mobile-nav {
- .mobile-nav {
   display: none;
   position: fixed;
   top: 0;
@@ -120,7 +120,6 @@ html, body { max-width: 100vw; overflow-x: hidden !important; }
   animation: mobileNavIn 0.35s cubic-bezier(.57,.24,.35,1.3);
   backdrop-filter: blur(7px);         /* Modern glass effect! */
   transition: background 0.3s, box-shadow 0.3s;
-}
 }
 .mobile-nav a {
   color: #2e2e2e;
@@ -142,7 +141,6 @@ html, body { max-width: 100vw; overflow-x: hidden !important; }
   background: linear-gradient(90deg, #e6c04c 20%, #e0b94d 100%);
   color: #fff;
   box-shadow: 0 4px 16px rgba(212, 175, 55, 0.18);
-}
 }
 
 @media (max-width: 900px) {
@@ -233,7 +231,6 @@ html, body { max-width: 100vw; overflow-x: hidden !important; }
 
 <!-- Mobile Menu Overlay (hidden by default) -->
 <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileMenu()"></div>
-
 <!-- Mobile Nav Sidebar -->
 <nav class="mobile-nav" id="mobileNav">
   <button class="close-mobile-nav" aria-label="Close navigation" onclick="closeMobileMenu()">&times;</button>
@@ -398,7 +395,6 @@ html, body { max-width: 100vw; overflow-x: hidden !important; }
   @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
   .slideshow-btn{position:absolute;top:50%;transform:translateY(-50%);background:var(--color-gold);color:#fff;border:none;padding:.75rem;border-radius:50%;cursor:pointer;font-size:1.5rem;transition:background .3s;}
   .slideshow-btn:hover{background:#b38f2d;transform:translateY(-50%) scale(1.1);} .slideshow-btn.prev{left:-2rem;} .slideshow-btn.next{right:-2rem;}
-
   /* Booking */
   .booking{padding:8rem 0;background:var(--color-ivory);position:relative;} 
   .booking-title{text-align:center;font-size:2.5rem;font-weight:700;margin-bottom:2rem;position:relative;}
@@ -644,7 +640,6 @@ html, body { max-width: 100vw; overflow-x: hidden !important; }
   font-size: 0.97rem;
   color: #585858;
 }
-
 /* Responsive tweaks */
 @media (max-width: 950px) {
   .about-grid { flex-direction: column; gap: 1.2rem; }
@@ -784,13 +779,7 @@ html, body { max-width: 100vw; overflow-x: hidden !important; }
 </header>
 <section class="hero" id="home">
 <div class="hero-content">
-<h1 class="hero-title" data-mk="Студио Бака Креатива" data-en="Studio Baka Kreativa">Студио Бака Креатива</h1>
-<p class="hero-subtitle" data-mk="Секој момент вреди — љубопитната Бака ќе го фати со стил, светлина и љубов." data-en="Every moment matters — curious Baka will capture it with style, light and love.">Секој момент вреди — љубопитната Бака ќе го фати со стил, светлина и љубов.</p>
-<button class="btn-hero" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'});" data-mk="Дознај повеќе" data-en="Learn More">Дознај повеќе</button>
-<div class="clip-art-arrow"></div>
-</div>
-</section>
-
+<h1 class="hero-title" data-mk="Студио Бака К
 <!-- About Section -->
 <section class="about" id="about">
 <h2 class="about-title" data-mk="За нас" data-en="About Us">За нас</h2>
@@ -1077,144 +1066,4 @@ html, body { max-width: 100vw; overflow-x: hidden !important; }
           {img:'images/480441997_517162151415525_5041905174948546160_n.jpg',title:'6. Спорт',desc:'Динамични моменти од спортските настани'},
           {img:'images/12312312 copy.png',title:'7. Музички настани',desc:'Енергија и страст во секој кадар'},
           {img:'images/121212.jpg',title:'8. Детски фотосесии',desc:'Невиност и радост во секој осмев'},
-          {img:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pexels-asphotograpy-212372.jpg-R6X4ackkIAQJyxgTVuNE4sjNfYEYow.jpeg',title:'9. Друго',desc:'Фотографија и видео за специјални барања'}
-      ] : [
-          {img:'images/DSC_0742 copy.jpg',title:'1. Weddings',desc:'Unforgettable moments from your most important day'},
-          {img:'images/476274242_509301132201627_7563436296873345710_n.jpg',title:'2. Baptisms',desc:'Bright moments from spiritual celebrations'},
-          {img:'images/481449499_527600347038372_7282178137399563395_n.jpg',title:'3. Birthdays & Parties',desc:'Joyful celebrations full of laughter'},
-          {img:'images/BAK_4080.JPG',title:'4. Corporate Events',desc:'Professional moments with style'},
-          {img:'images/DSC_2651.JPG',title:'5. Private Photoshoots',desc:'Personal art and creativity'},
-          {img:'images/480441997_517162151415525_5041905174948546160_n.jpg',title:'6. Sports',desc:'Dynamic moments from sporting events'},
-          {img:'images/12312312 copy.png',title:'7. Music Events',desc:'Energy and passion in every frame'},
-          {img:'images/121212.jpg',title:'8. Children\'s Photoshoots',desc:'Innocence and joy in every smile'},
-          {img:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pexels-asphotograpy-212372.jpg-R6X4ackkIAQJyxgTVuNE4sjNfYEYow.jpeg',title:'9. Other',desc:'Photography and video for special requests'}
-      ];
-      
-      const grid = document.querySelector('.service-grid');
-      grid.innerHTML = '';
-      servicesData.forEach(s => {
-          const c = document.createElement('div');
-          c.className = 'service-card';
-          const buttonText = currentLanguage === 'mk' ? 'Резервирај' : 'Book Now';
-          c.innerHTML = `<img class='service-image' src='${s.img}' alt=''><div class='service-content'><h3 class='service-title'>${s.title}</h3><p class='service-desc'>${s.desc}</p><a class='service-btn' href='#booking'>${buttonText}</a></div>`;
-          grid.appendChild(c);
-      });
-  }
-
-  // Initialize services and slideshow
-  const servicesData=[{img:'images/DSC_0742 copy.jpg',title:'1. Свадби',desc:'Незаборавни моменти од вашиот најважен ден'},{img:'images/476274242_509301132201627_7563436296873345710_n.jpg',title:'2. Крштевки',desc:'Светли моменти од духовното славење'},{img:'images/481449499_527600347038372_7282178137399563395_n.jpg',title:'3. Родендени и забави',desc:'Радосни празнувања полни со смеа'},{img:'images/BAK_4080.JPG',title:'4. Корпоративни настани',desc:'Професионални моменти со стил'},{img:'images/DSC_2651.JPG',title:'5. Приватни фотосесии',desc:'Лична уметност и креативност'},{img:'images/480441997_517162151415525_5041905174948546160_n.jpg',title:'6. Спорт',desc:'Динамични моменти од спортските настани'},{img:'images/12312312 copy.png',title:'7. Музички настани',desc:'Енергија и страст во секој кадар'},{img:'images/121212.jpg',title:'8. Детски фотосесии',desc:'Невиност и радост во секој осмев'},{img:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pexels-asphotograpy-212372.jpg-R6X4ackkIAQJyxgTVuNE4sjNfYEYow.jpeg',title:'9. Друго',desc:'Фотографија и видео за специјални барања'}];
-  const grid=document.querySelector('.service-grid');servicesData.forEach(s=>{const c=document.createElement('div');c.className='service-card';c.innerHTML=`<img class='service-image' src='${s.img}' alt=''><div class='service-content'><h3 class='service-title'>${s.title}</h3><p class='service-desc'>${s.desc}</p><a class='service-btn' href='#booking'>Резервирај</a></div>`;grid.appendChild(c);});
-  const images=['505444919_606448679153538_9042537740825313968_n.jpg','475969587_506700922461648_3106474446517222839_n.jpg','476230275_505121755952898_1455905859183553477_n.jpg','475799344_505505439247863_8710145677332244737_n.jpg','475919196_505640509234356_5417417088216181951_n.jpg','DSC_1912.jpg','DSC_2170.jpg'];
-  const sc=document.querySelector('.slideshow-container'), prevBtn=document.querySelector('.slideshow-btn.prev'), nextBtn=document.querySelector('.slideshow-btn.next');
-  images.forEach((img,i)=>{const el=document.createElement('img');el.src='images/'+img;el.className='slideshow-slide'+(i===0?' active':'');sc.insertBefore(el, sc.firstChild);});
-  let idx=0;function showSlide(i){document.querySelectorAll('.slideshow-slide').forEach((s,j)=>s.classList.toggle('active',j===i));}
-  prevBtn.addEventListener('click',()=>{idx=(idx-1+images.length)%images.length;showSlide(idx);});
-  nextBtn.addEventListener('click',()=>{idx=(idx+1)%images.length;showSlide(idx);});
-  setInterval(()=>nextBtn.click(),5000);
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  // Navigation links and section IDs in order
-  const navLinks = document.querySelectorAll('.nav-links a');
-  const sectionIds = ['about', 'services', 'gallery', 'booking'];
-  const sections = sectionIds.map(id => document.getElementById(id));
-
-  // Highlight correct nav tab based on scroll
-  function highlightNav() {
-    let current = 0;
-    const scrollPos = window.scrollY + 130; // adjust 130px for header height
-    for (let i = 0; i < sections.length; i++) {
-      if (sections[i] && sections[i].offsetTop <= scrollPos) {
-        current = i;
-      }
-    }
-    navLinks.forEach((link, idx) => {
-      if (idx === current) link.classList.add('active');
-      else link.classList.remove('active');
-    });
-  }
-
-  // On scroll
-  window.addEventListener('scroll', highlightNav, { passive: true });
-  // On page load
-  highlightNav();
-
-  // On nav click: scroll and highlight instantly
-  navLinks.forEach((link, idx) => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      sections[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Instant highlight for UX
-      navLinks.forEach((l, i) => l.classList.toggle('active', i === idx));
-    });
-  });
-});
-</script>
-<nav class="nav-links">
-</nav>
-<script>
-```js
-function openMobileMenu() {
-document.getElementById('mobileNav').style.display = 'flex';
-document.getElementById('mobileNavOverlay').style.display = 'block';
-setTimeout(function(){
-  document.getElementById('mobileNavOverlay').style.opacity = '1';
-}, 10);
-document.body.classList.add('menu-open');
-setTimeout(() => {
-  document.addEventListener('mousedown', clickOutsideMenu, true);
-  document.addEventListener('keydown', escCloseMenu, true);
-}, 30);
-}
-function closeMobileMenu() {
-document.getElementById('mobileNav').style.display = 'none';
-document.getElementById('mobileNavOverlay').style.opacity = '0';
-setTimeout(function(){
-  document.getElementById('mobileNavOverlay').style.display = 'none';
-}, 220);
-document.body.classList.remove('menu-open');
-document.removeEventListener('mousedown', clickOutsideMenu, true);
-document.removeEventListener('keydown', escCloseMenu, true);
-}
-function clickOutsideMenu(e) {
-const nav = document.getElementById('mobileNav');
-if (nav.style.display === 'flex' && !nav.contains(e.target)) {
-  closeMobileMenu();
-}
-}
-function escCloseMenu(e) {
-if (e.key === "Escape") closeMobileMenu();
-}
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const getMenu = document.querySelector(".mainMenu");
-  const getHamburger = document.querySelector("#toggle-bar");
-  if(getHamburger) {
-    getHamburger.addEventListener("click", function () {
-      getMenu.classList.toggle("hamburger");
-      // Close if already open and clicked again
-      // Optionally scroll lock
-      if(getMenu.classList.contains("hamburger")) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
-    });
-  }
-  // Close menu when a link is clicked
-  document.querySelectorAll(".mainMenu a").forEach(link => {
-    link.addEventListener("click", () => {
-      getMenu.classList.remove("hamburger");
-      document.body.style.overflow = '';
-    });
-  });
-  // Optional: Hide on scroll
-  window.addEventListener('scroll', function() {
-    getMenu.classList.remove("hamburger");
-    document.body.style.overflow = '';
-  });
-});
-</script>
-</body>
-</html>
+          {img:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pex
