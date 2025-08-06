@@ -1279,5 +1279,46 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+  <script>
+function openMobileMenu() {
+  document.getElementById('mobileNav').classList.add('open');
+  document.getElementById('mobileNavOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileMenu() {
+  document.getElementById('mobileNav').classList.remove('open');
+  document.getElementById('mobileNavOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close menu on any click not inside menu or hamburger
+document.addEventListener('click', function(event) {
+  const nav = document.getElementById('mobileNav');
+  const hamburger = document.querySelector('.hamburger-menu');
+  if (
+    nav.classList.contains('open') &&
+    !nav.contains(event.target) &&
+    !hamburger.contains(event.target)
+  ) {
+    closeMobileMenu();
+  }
+});
+
+// Also close on scroll (nice for mobile)
+window.addEventListener('scroll', function() {
+  if (document.getElementById('mobileNav').classList.contains('open')) {
+    closeMobileMenu();
+  }
+});
+
+// Prevent clicks inside menu from bubbling up to document (keeps menu open when clicking inside)
+document.getElementById('mobileNav').addEventListener('click', function(event) {
+  event.stopPropagation();
+});
+// Prevent hamburger click from bubbling (otherwise menu closes instantly after opening)
+document.querySelector('.hamburger-menu').addEventListener('click', function(event) {
+  event.stopPropagation();
+});
+</script>
 </body>
 </html>
