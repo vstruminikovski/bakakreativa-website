@@ -754,6 +754,42 @@
 }
 </style>
 </head>
+<script>
+function openMobileMenu() {
+  document.getElementById('mobileNav').classList.add('open');
+  document.getElementById('mobileNavOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileMenu() {
+  document.getElementById('mobileNav').classList.remove('open');
+  document.getElementById('mobileNavOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Click outside menu to close
+document.addEventListener('mousedown', function(event) {
+  const nav = document.getElementById('mobileNav');
+  const overlay = document.getElementById('mobileNavOverlay');
+  const hamburger = document.querySelector('.hamburger-menu');
+  // Only close if menu is open
+  if (
+    nav.classList.contains('open') &&
+    !nav.contains(event.target) &&
+    !hamburger.contains(event.target)
+  ) {
+    closeMobileMenu();
+  }
+});
+
+// Optional: Close menu on scroll (mobile experience)
+window.addEventListener('scroll', function() {
+  const nav = document.getElementById('mobileNav');
+  if (nav.classList.contains('open')) {
+    closeMobileMenu();
+  }
+});
+</script>
 <body>
 <header>
 <div class="header-top">
