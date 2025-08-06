@@ -47,6 +47,58 @@
   backdrop-filter: blur(4px);                 /* <--- optional, modern glass effect */
   -webkit-backdrop-filter: blur(4px);         /* Safari support */
   transition: background 0.25s;
+.floating-hamburger-menu {
+  display: none; /* Show only on mobile below */
+  position: fixed;
+  bottom: 1.6rem;
+  right: 1.4rem;
+  z-index: 3300;
+  background: #fff;
+  border: 2.5px solid var(--color-gold, #d4af37);
+  border-radius: 1.5em;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.09);
+  padding: 0.64rem 0.77rem 0.54rem 0.77rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  min-height: 50px;
+  cursor: pointer;
+  transition: box-shadow .22s;
+}
+.floating-hamburger-menu span {
+  display: block;
+  width: 28px;
+  height: 3.6px;
+  margin: 3.8px 0;
+  background: var(--color-gold, #d4af37);
+  border-radius: 2px;
+  transition: 0.28s;
+}
+.floating-hamburger-menu .hamburger-label {
+  font-size: 0.92rem;
+  color: var(--color-gold, #d4af37);
+  margin-top: 5px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+}
+.floating-hamburger-menu:hover {
+  box-shadow: 0 8px 24px rgba(212,175,55,0.18);
+}
+
+/* Only show on mobile */
+@media (max-width: 900px) {
+  .floating-hamburger-menu {
+    display: flex;
+  }
+}
+@media (min-width: 901px) {
+  .floating-hamburger-menu {
+    display: none !important;
+  }
+}
+
 }
 /* Only show hamburger on mobile */
 .hamburger-menu {
@@ -1201,6 +1253,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.overflow = '';
   });
 });
+<!-- Floating Hamburger Menu (Mobile Only) -->
+<button class="floating-hamburger-menu" aria-label="Open navigation" onclick="openMobileMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span class="hamburger-label">Menu</span>
+</button>
 </script>
 </body>
 </html>
