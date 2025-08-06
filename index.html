@@ -446,7 +446,15 @@
         overflow-x: hidden; 
         position: relative;
       }
-      
+      .slideshow-btn.prev { left: 0.3rem; }
+  .slideshow-btn.next { right: 0.3rem; }
+  .slideshow-btn {
+    padding: 0.55rem;
+    font-size: 1.18rem;
+  }
+  .slideshow-slide {
+    height: 220px;  /* Optional: reduce slide height for mobile */
+  }
       /* Hide footer completely on mobile */
       footer { display: none; }
     @media (max-width: 700px) {
