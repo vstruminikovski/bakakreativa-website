@@ -1229,43 +1229,61 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
+<nav class="nav-links">
+</nav>
+<script>
 function openMobileMenu() {
-  document.getElementById('mobileNav').classList.add('open');
-  document.getElementById('mobileNavOverlay').classList.add('open');
+  document.getElementById('mobileNav').style.display = 'flex';
+  document.getElementById('mobileNavOverlay').style.display = 'block';
+  setTimeout(function(){
+    document.getElementById('mobileNavOverlay').style.opacity = '1';
+  }, 10);
   document.body.style.overflow = 'hidden';
 }
 function closeMobileMenu() {
-  document.getElementById('mobileNav').classList.remove('open');
-  document.getElementById('mobileNavOverlay').classList.remove('open');
+  document.getElementById('mobileNav').style.display = 'none';
+  document.getElementById('mobileNavOverlay').style.opacity = '0';
+  setTimeout(function(){
+    document.getElementById('mobileNavOverlay').style.display = 'none';
+  }, 220);
   document.body.style.overflow = '';
 }
-
-// Close menu on any click not inside menu or hamburger
-document.addEventListener('click', function(event) {
-  const nav = document.getElementById('mobileNav');
-  const hamburger = document.querySelector('.hamburger-menu');
-  if (
-    nav.classList.contains('open') &&
-    !nav.contains(event.target) &&
-    !hamburger.contains(event.target)
-  ) {
-    closeMobileMenu();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const getMenu = document.querySelector(".mainMenu");
+  const getHamburger = document.querySelector("#toggle-bar");
+  if(getHamburger) {
+    getHamburger.addEventListener("click", function () {
+      getMenu.classList.toggle("hamburger");
+      // Close if already open and clicked again
+      // Optionally scroll lock
+      if(getMenu.classList.contains("hamburger")) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
   }
+  // Close menu when a link is clicked
+  document.querySelectorAll(".mainMenu a").forEach(link => {
+    link.addEventListener("click", () => {
+      getMenu.classList.remove("hamburger");
+      document.body.style.overflow = '';
+    });
+  });
+  // Optional: Hide on scroll
+  window.addEventListener('scroll', function() {
+    getMenu.classList.remove("hamburger");
+    document.body.style.overflow = '';
+  });
 });
-
-// Also close on scroll (nice for mobile)
-window.addEventListener('scroll', function() {
-  if (document.getElementById('mobileNav').classList.contains('open')) {
-    closeMobileMenu();
-  }
-});
-
-// Prevent clicks inside menu from bubbling up to document (keeps menu open when clicking inside)
-document.getElementById('mobileNav').addEventListener('click', function(event) {
-  event.stopPropagation();
-});
-// Prevent hamburger click from bubbling (otherwise menu closes instantly after opening)
-document.querySelector('.hamburger-menu').addEventListener('click', function(event) {
+</script>
+  <script>
+function openMobileMenu() {
+  document.getElementById('mobileNav').classList.add('open');
+  document.getElementById('mobileNavOverlay').classList.add('open');
+@@ -1320,5 +1269,6 @@ <h2 class="booking-title" data-mk="Резервирај Термин" data-en="B
   event.stopPropagation();
 });
 </script>
