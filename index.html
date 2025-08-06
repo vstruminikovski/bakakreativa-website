@@ -1103,6 +1103,7 @@ function toggleLanguage() {
   const elements = document.querySelectorAll('[data-mk][data-en], [data-placeholder-mk][data-placeholder-en], [data-mk-option][data-en-option]');
   const button = document.querySelector('.language-toggle');
 
+
   // For regular text elements and nav, etc.
   document.querySelectorAll('[data-mk][data-en]').forEach(element => {
     if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
@@ -1286,6 +1287,31 @@ function openMobileMenu() {
   document.getElementById('mobileNavOverlay').classList.add('open');
 @@ -1320,5 +1269,6 @@ <h2 class="booking-title" data-mk="Резервирај Термин" data-en="B
   event.stopPropagation();
+});
+</script>
+<script>
+// Default language (change to 'en' if you want English by default)
+let currentLang = 'mk';
+
+// Call this whenever you toggle the language!
+function updateMenuLanguage(lang) {
+  document.querySelectorAll('#mobileNav a').forEach(function(link) {
+    if (link.dataset[lang]) {
+      link.textContent = link.dataset[lang];
+    }
+  });
+}
+
+// Example toggle function (connect this to your language toggle button)
+function toggleLanguage() {
+  currentLang = (currentLang === 'mk') ? 'en' : 'mk';
+  updateMenuLanguage(currentLang);
+  // Call any other translation logic for the rest of your site here
+}
+
+// Optional: Update menu on page load (for initial language)
+document.addEventListener('DOMContentLoaded', function() {
+  updateMenuLanguage(currentLang);
 });
 </script>
 
