@@ -1190,6 +1190,7 @@ if (gallerySeeMore) {
           const c = document.createElement('div');
           c.className = 'service-card';
           const buttonText = currentLanguage === 'mk' ? 'Резервирај' : 'Book Now';
+          const bookText = currentLanguage === 'mk' ? 'Резервирај' : 'Book Now';
           c.innerHTML = `<img class='service-image' src='${s.img}' alt=''><div class='service-content'><h3 class='service-title'>${s.title}</h3><p class='service-desc'>${s.desc}</p><a class='service-btn' href='#booking'>${buttonText}</a></div>`;
           grid.appendChild(c);
       });
