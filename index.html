@@ -522,6 +522,78 @@
         padding-right: 0.5rem;
       }
   }
+/* Hamburger and mobile menu CSS */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none !important;
+  }
+  #toggle-bar {
+    display: block !important;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    z-index: 1102;
+    color: var(--color-gold, #D4AF37);
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0 0.4em;
+    border-radius: 6px;
+    box-shadow: none;
+  }
+  .mainMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(180,170,80,0.08);
+    margin: 0;
+    padding: 1.2rem 0 1rem 0;
+    list-style: none;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    z-index: 1101;
+    border-radius: 0 0 20px 20px;
+    animation: fadeInMenu 0.3s;
+  }
+  .mainMenu.hamburger {
+    display: flex !important;
+  }
+  .mainMenu li {
+    padding: 0.4rem 2.2rem;
+    text-align: left;
+  }
+  .mainMenu li a {
+    font-size: 1.16rem;
+    color: var(--color-gold, #D4AF37);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.6em 0;
+    display: block;
+    border-bottom: 1px solid #f6ecd2;
+    transition: color 0.17s;
+    border-radius: 8px;
+  }
+  .mainMenu li:last-child a {
+    border-bottom: none;
+  }
+  .mainMenu li a:hover {
+    color: #b89e40;
+    background: #faf7ea;
+  }
+}
+
+@media (min-width: 901px) {
+  #toggle-bar, .mainMenu { display: none !important; }
+}
+
+@keyframes fadeInMenu {
+  from { opacity: 0; transform: translateY(-15px);}
+  to   { opacity: 1; transform: translateY(0);}
+}
 </style>
 </head>
 <body>
@@ -556,6 +628,16 @@
     <a href="#gallery" data-mk="Галерија" data-en="Gallery">Галерија</a>
     <a href="#booking" data-mk="Резервирај" data-en="Book">Резервирај</a>
   </nav>
+<!-- Hamburger Toggle Bar for Mobile -->
+<div class="tootle-menu">
+  <h1 id="toggle-bar" style="font-size:2.4rem;line-height:1;cursor:pointer;user-select:none;display:none;">☰</h1>
+</div>
+<ul class="mainMenu" style="display:none;">
+  <li><a href="#about">За нас</a></li>
+  <li><a href="#services">Услуги</a></li>
+  <li><a href="#gallery">Галерија</a></li>
+  <li><a href="#booking">Резервирај</a></li>
+</ul>
 </div>
 </header>
 <section class="hero" id="home">
@@ -945,6 +1027,36 @@ function closeMobileMenu() {
   }, 220);
   document.body.style.overflow = '';
 }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const getMenu = document.querySelector(".mainMenu");
+  const getHamburger = document.querySelector("#toggle-bar");
+  if(getHamburger) {
+    getHamburger.addEventListener("click", function () {
+      getMenu.classList.toggle("hamburger");
+      // Close if already open and clicked again
+      // Optionally scroll lock
+      if(getMenu.classList.contains("hamburger")) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+  }
+  // Close menu when a link is clicked
+  document.querySelectorAll(".mainMenu a").forEach(link => {
+    link.addEventListener("click", () => {
+      getMenu.classList.remove("hamburger");
+      document.body.style.overflow = '';
+    });
+  });
+  // Optional: Hide on scroll
+  window.addEventListener('scroll', function() {
+    getMenu.classList.remove("hamburger");
+    document.body.style.overflow = '';
+  });
+});
 </script>
 </body>
 </html>
