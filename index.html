@@ -50,17 +50,24 @@
 }
 /* Only show hamburger on mobile */
 .hamburger-menu {
-  display: none;
+ display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;    /* or higher if you want more space for label */
+  min-width: 48px;     /* keeps the clickable area decent size */
+  /* Remove excessive padding if label is cut off */
+  padding: 0.3rem 0.6rem;
   background: none;
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 0.55rem 0.6rem;
   position: absolute;
   right: 2.9rem;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1201;
+}
 }
 .hamburger-menu span {
   display: block;
@@ -223,7 +230,7 @@
   <span></span>
   <span></span>
   <span></span>
-  <div class="hamburger-label">Menu</div>
+  <span class="hamburger-label">Menu</span>
 </button>
 
 <!-- Mobile Menu Overlay (hidden by default) -->
