@@ -128,19 +128,41 @@
   .contact-info a:hover { color:var(--color-gold); }
   .language-toggle { background:var(--color-gold); color:#fff; border:none; padding:0.25rem 0.75rem; border-radius:1rem; cursor:pointer; font-size:0.75rem; transition:background 0.3s; }
   .language-toggle:hover { background:#b38f2d; }
-  .header-container { max-width:1280px; margin:0 auto; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; position:relative; }
+  .header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0.5rem 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
   
   /* Logo and Tagline Container - ENLARGED BY 20% */
-  .logo-container { display:flex; align-items:center; gap:1rem; }
-  .logo { height:4.8rem; animation:pulse-logo 3s infinite; } /* 4rem -> 4.8rem (20% increase) */
+ .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.logo {
+  max-height: 4.5rem;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  display: block;
+  animation: pulse-logo 3s infinite;
+}
   @keyframes pulse-logo { 0%,100%{transform:scale(1);}50%{transform:scale(1.1);} }
-  .tagline { 
-    font-size:1.32rem; /* 1.1rem -> 1.32rem (20% increase) */
-    font-weight:600; 
-    color:var(--color-gold); 
-    text-shadow:1px 1px 2px rgba(0,0,0,0.1);
-    animation:fadeIn 2s ease-in;
-  }
+  .tagline {
+  font-size: 1.06rem;
+  font-weight: 400;
+  color: var(--color-gold);
+  opacity: 0.93;
+  margin-left: 0.3rem;
+  animation: fadeIn 2s ease-in;
+  text-shadow: none;
+}
   @keyframes fadeIn { from{opacity:0;}to{opacity:1;} }
   
   .nav-links { display:flex; gap:1rem; }
