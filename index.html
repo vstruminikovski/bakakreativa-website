@@ -1141,6 +1141,9 @@ function toggleLanguage() {
   if (button) {
     button.textContent = currentLanguage === 'mk' ? 'EN' : 'МК';
   }
+<button type="button" class="language-toggle" onclick="toggleLanguage()">
+  EN / MK
+</button>
 
   // Update services data
   updateServicesLanguage();
