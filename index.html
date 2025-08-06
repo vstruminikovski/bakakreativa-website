@@ -1037,13 +1037,28 @@
 </script>
 <!-- ======================================================= -->
 <script>
-  let currentLanguage = 'mk';
+let currentLanguage = 'mk';
 
-  // Language toggle function
-function toggleLanguage() {
-  currentLanguage = currentLanguage === 'mk' ? 'en' : 'mk';
-  const elements = document.querySelectorAll('[data-mk][data-en], [data-placeholder-mk][data-placeholder-en], [data-mk-option][data-en-option]');
+function setLanguageToggleButton() {
   const button = document.querySelector('.language-toggle');
+  const label = button.querySelector('#lang-label');
+  const flagMK = button.querySelector('#flag-mk');
+  const flagUK = button.querySelector('#flag-uk');
+  if (currentLanguage === 'mk') {
+    label.textContent = "EN";
+    flagUK.style.display = "";
+    flagMK.style.display = "none";
+  } else {
+    label.textContent = "МК";
+    flagUK.style.display = "none";
+    flagMK.style.display = "";
+  }
+}
+
+// Call once after DOM content loads
+document.addEventListener("DOMContentLoaded", function () {
+  setLanguageToggleButton();
+});
 
   // For regular text elements and nav, etc.
   document.querySelectorAll('[data-mk][data-en]').forEach(element => {
