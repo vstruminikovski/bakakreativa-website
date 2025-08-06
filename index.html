@@ -1229,57 +1229,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
-<nav class="nav-links">
-</nav>
-<script>
-function openMobileMenu() {
-  document.getElementById('mobileNav').style.display = 'flex';
-  document.getElementById('mobileNavOverlay').style.display = 'block';
-  setTimeout(function(){
-    document.getElementById('mobileNavOverlay').style.opacity = '1';
-  }, 10);
-  document.body.style.overflow = 'hidden';
-}
-function closeMobileMenu() {
-  document.getElementById('mobileNav').style.display = 'none';
-  document.getElementById('mobileNavOverlay').style.opacity = '0';
-  setTimeout(function(){
-    document.getElementById('mobileNavOverlay').style.display = 'none';
-  }, 220);
-  document.body.style.overflow = '';
-}
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const getMenu = document.querySelector(".mainMenu");
-  const getHamburger = document.querySelector("#toggle-bar");
-  if(getHamburger) {
-    getHamburger.addEventListener("click", function () {
-      getMenu.classList.toggle("hamburger");
-      // Close if already open and clicked again
-      // Optionally scroll lock
-      if(getMenu.classList.contains("hamburger")) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
-    });
-  }
-  // Close menu when a link is clicked
-  document.querySelectorAll(".mainMenu a").forEach(link => {
-    link.addEventListener("click", () => {
-      getMenu.classList.remove("hamburger");
-      document.body.style.overflow = '';
-    });
-  });
-  // Optional: Hide on scroll
-  window.addEventListener('scroll', function() {
-    getMenu.classList.remove("hamburger");
-    document.body.style.overflow = '';
-  });
-});
-</script>
-  <script>
 function openMobileMenu() {
   document.getElementById('mobileNav').classList.add('open');
   document.getElementById('mobileNavOverlay').classList.add('open');
@@ -1320,5 +1269,6 @@ document.querySelector('.hamburger-menu').addEventListener('click', function(eve
   event.stopPropagation();
 });
 </script>
+
 </body>
 </html>
