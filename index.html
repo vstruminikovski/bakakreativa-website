@@ -1040,26 +1040,53 @@
   let currentLanguage = 'mk';
 
   // Language toggle function
-  function toggleLanguage() {
-      currentLanguage = currentLanguage === 'mk' ? 'en' : 'mk';
-      const elements = document.querySelectorAll('[data-mk][data-en]');
-      const button = document.querySelector('.language-toggle');
-      
-      elements.forEach(element => {
-          if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-              element.placeholder = element.getAttribute(`data-placeholder-${currentLanguage}`);
-          } else if (element.tagName === 'OPTION') {
-              element.textContent = element.getAttribute(`data-${currentLanguage}`);
-          } else {
-              element.textContent = element.getAttribute(`data-${currentLanguage}`);
-          }
-      });
-      
-      button.textContent = currentLanguage === 'mk' ? 'EN' : 'МК';
-      
-      // Update services data
-      updateServicesLanguage();
+function toggleLanguage() {
+  currentLanguage = currentLanguage === 'mk' ? 'en' : 'mk';
+  const elements = document.querySelectorAll('[data-mk][data-en], [data-placeholder-mk][data-placeholder-en], [data-mk-option][data-en-option]');
+  const button = document.querySelector('.language-toggle');
+
+  // For regular text elements and nav, etc.
+  document.querySelectorAll('[data-mk][data-en]').forEach(element => {
+    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+      // handled below
+      return;
+    } else if (element.tagName === 'OPTION') {
+      element.textContent = element.getAttribute(`data-${currentLanguage}`);
+    } else {
+      element.textContent = element.getAttribute(`data-${currentLanguage}`);
+    }
+  });
+
+  // For placeholders (inputs, textarea)
+  document.querySelectorAll('input[data-placeholder-mk][data-placeholder-en], textarea[data-placeholder-mk][data-placeholder-en]').forEach(element => {
+    element.placeholder = element.getAttribute(`data-placeholder-${currentLanguage}`);
+  });
+
+  // For select <option> (booking form event type)
+  document.querySelectorAll('select[name="event_type"] option').forEach(option => {
+    const mk = option.getAttribute('data-mk');
+    const en = option.getAttribute('data-en');
+    if (mk && en) {
+      option.textContent = currentLanguage === 'mk' ? mk : en;
+    }
+  });
+
+  // For select placeholder itself (first <option>)
+  const select = document.querySelector('select[name="event_type"]');
+  if (select) {
+    select.options[0].textContent = currentLanguage === 'mk'
+      ? select.getAttribute('data-mk-option')
+      : select.getAttribute('data-en-option');
   }
+
+  // Update language toggle button
+  if (button) {
+    button.textContent = currentLanguage === 'mk' ? 'EN' : 'МК';
+  }
+
+  // Update services data
+  updateServicesLanguage();
+}
 
   // Update services with language
   function updateServicesLanguage() {
