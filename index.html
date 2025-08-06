@@ -153,13 +153,14 @@
     padding-left: 1.2rem;
     padding-top: 2rem;
   }
-}
-  .logo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.2rem;
+  /* <<< ADD THIS BELOW >>> */
+  .header-container {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
   }
+}
   .logo {
     width: 130px;
     height: auto;
@@ -755,16 +756,6 @@
     <a href="#gallery" data-mk="Галерија" data-en="Gallery">Галерија</a>
     <a href="#booking" data-mk="Резервирај" data-en="Book">Резервирај</a>
   </nav>
-<!-- Hamburger Toggle Bar for Mobile -->
-<div class="tootle-menu">
-  <h1 id="toggle-bar" style="font-size:2.4rem;line-height:1;cursor:pointer;user-select:none;display:none;">☰</h1>
-</div>
-<ul class="mainMenu" style="display:none;">
-  <li><a href="#about">За нас</a></li>
-  <li><a href="#services">Услуги</a></li>
-  <li><a href="#gallery">Галерија</a></li>
-  <li><a href="#booking">Резервирај</a></li>
-</ul>
 </div>
 </header>
 <section class="hero" id="home">
