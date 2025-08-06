@@ -32,6 +32,57 @@
     --color-shadow: rgba(0, 0, 0, 0.15);
     /* Accent Gradient */
     --gradient-gold: linear-gradient(45deg, #D4AF37 0%, #F0E68C 100%);
+.floating-hamburger-menu {
+  display: none; /* Hidden by default, shown below on mobile */
+  position: fixed;
+  bottom: 1.3rem;
+  right: 1.1rem;
+  z-index: 3400;
+  background: #fff;
+  border: 2.5px solid var(--color-gold, #d4af37);
+  border-radius: 1.7em;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+  padding: 0.7rem 0.8rem 0.55rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  min-height: 52px;
+  cursor: pointer;
+  transition: box-shadow .22s;
+  opacity: 0.98;
+}
+.floating-hamburger-menu span:not(.hamburger-label) {
+  display: block;
+  width: 28px;
+  height: 3.8px;
+  margin: 3.8px 0;
+  background: var(--color-gold, #d4af37);
+  border-radius: 2px;
+  transition: 0.28s;
+}
+.floating-hamburger-menu .hamburger-label {
+  font-size: 0.93rem;
+  color: var(--color-gold, #d4af37);
+  margin-top: 7px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+}
+.floating-hamburger-menu:hover {
+  box-shadow: 0 10px 26px rgba(212,175,55,0.18);
+}
+/* Mobile only: show */
+@media (max-width: 900px) {
+  .floating-hamburger-menu {
+    display: flex !important;
+  }
+}
+@media (min-width: 901px) {
+  .floating-hamburger-menu {
+    display: none !important;
+  }
+}
 @media (min-width: 700px) {
 .header-container {
   display: flex;
