@@ -1080,9 +1080,10 @@ function toggleLanguage() {
   }
 
   // Update language toggle button
-    <button class="language-toggle" onclick="toggleLanguage()" style="display:flex;align-items:center;gap:2px;padding:0.25rem 0.75rem;">
+    <button class="language-toggle" onclick="toggleLanguage()" style="display:flex;align-items:center;gap:4px;padding:0.25rem 0.8rem;">
   <span class="lang-flag" id="flag-uk" style="display:none;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 60 40" style="vertical-align:middle;margin-right:4px;">
+    <!-- UK SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="11" viewBox="0 0 60 40" style="vertical-align:middle;">
       <rect width="60" height="40" fill="#012169"/>
       <polygon points="0,0 60,40 60,33.3 8.6,0" fill="#fff"/>
       <polygon points="60,0 0,40 0,33.3 51.4,0" fill="#fff"/>
@@ -1095,7 +1096,8 @@ function toggleLanguage() {
     </svg>
   </span>
   <span class="lang-flag" id="flag-mk" style="display:none;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 60 40" style="vertical-align:middle;margin-right:4px;">
+    <!-- MK SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="11" viewBox="0 0 60 40" style="vertical-align:middle;">
       <rect width="60" height="40" fill="#d20000"/>
       <circle cx="30" cy="20" r="8" fill="#ffe600"/>
       <g stroke="#ffe600" stroke-width="3">
@@ -1108,7 +1110,6 @@ function toggleLanguage() {
   </span>
   <span id="lang-label">EN</span>
 </button>
-
   }
 
   // Update services data
