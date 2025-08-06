@@ -295,30 +295,39 @@
       footer { display: none; }
       
       /* Compact header for mobile */
-      .header-top { padding: 0.25rem 0; font-size: 0.75rem; }
-      .header-top-container { 
-          flex-direction: column; 
-          gap: 0.5rem; 
-          padding: 0.5rem 0.75rem; 
-          width: 100%;
-          box-sizing: border-box;
-      }
-      .contact-info { 
-          display: grid; 
-          grid-template-columns: 1fr 1fr; 
-          gap: 0.25rem; 
-          text-align: center; 
-          font-size: 0.7rem; 
-          width: 100%;
-      }
-      .language-toggle { font-size: 0.65rem; padding: 0.2rem 0.5rem; }
-      .camera-decoration { display: none; }
-      .header-container { 
-        padding: 0.5rem 0.75rem; 
-        flex-wrap: wrap; 
-        gap: 0.5rem; 
-        width: 100%;
-        box-sizing: border-box;
+     .header-top { 
+  padding: 0.18rem 0; 
+  font-size: 0.70rem; 
+  background: rgba(46,46,46, 0.93);
+  border-bottom: 1px solid #e8e6e1;
+}
+.header-top-container { 
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem; 
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.18rem 0.5rem; 
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 0.92em;
+}
+.contact-info { 
+  display: flex; 
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.7rem; 
+  font-size: 0.96em; 
+}
+.language-toggle { 
+  font-size: 0.78rem; 
+  padding: 0.18rem 0.8rem;
+  margin-left: 0.3rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  align-self: center;
+  height: 2rem;
+  border-radius: 1rem;
+}
       }
       
       /* Mobile logo and tagline - HORIZONTAL layout to save space - ENLARGED BY 20% */
@@ -396,16 +405,16 @@
 <body>
 <header>
 <div class="header-top">
-  <div class="header-top-container">
-      <div class="contact-info">
-          <a href="tel:+38971215632">📞 +389 71 215 632</a>
-          <a href="tel:+38970399250">📞 +389 70 399 250</a>
-          <a href="mailto:bakakreativa@gmail.com">✉️ bakakreativa@gmail.com</a>
-          <a href="https://www.facebook.com/profile.php?id=61577755042263" target="_blank" rel="noopener noreferrer">📸 Facebook</a>
-          <a href="https://instagram.com/bakakreativa" target="_blank" rel="noopener noreferrer">📷 Instagram</a>
-      </div>
-      <button class="language-toggle" onclick="toggleLanguage()">EN</button>
-  </div>
+<div class="header-top-container">
+    <div class="contact-info">
+        <a href="tel:+38971215632">📞 +389 71 215 632</a>
+        <a href="tel:+38970399250">📞 +389 70 399 250</a>
+        <a href="mailto:bakakreativa@gmail.com">✉️ Email</a>
+        <a href="https://www.facebook.com/profile.php?id=61577755042263" target="_blank" rel="noopener noreferrer">📸 Facebook</a>
+        <a href="https://instagram.com/bakakreativa" target="_blank" rel="noopener noreferrer">📷 Instagram</a>
+        <button class="language-toggle" onclick="toggleLanguage()">EN</button>
+    </div>
+</div>
   <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ol15_ii19_230118-removebg-preview-nUD1PTYQBBLC7WqyVDNqupMUCMR8Kj.png" alt="" class="camera-decoration">
 </div>
 <div class="header-container">
