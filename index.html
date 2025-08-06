@@ -1289,31 +1289,5 @@ function openMobileMenu() {
   event.stopPropagation();
 });
 </script>
-<script>
-// Default language (change to 'en' if you want English by default)
-let currentLang = 'mk';
-
-// Call this whenever you toggle the language!
-function updateMenuLanguage(lang) {
-  document.querySelectorAll('#mobileNav a').forEach(function(link) {
-    if (link.dataset[lang]) {
-      link.textContent = link.dataset[lang];
-    }
-  });
-}
-
-// Example toggle function (connect this to your language toggle button)
-function toggleLanguage() {
-  currentLang = (currentLang === 'mk') ? 'en' : 'mk';
-  updateMenuLanguage(currentLang);
-  // Call any other translation logic for the rest of your site here
-}
-
-// Optional: Update menu on page load (for initial language)
-document.addEventListener('DOMContentLoaded', function() {
-  updateMenuLanguage(currentLang);
-});
-</script>
-
 </body>
 </html>
