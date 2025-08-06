@@ -33,18 +33,21 @@
     /* Accent Gradient */
     --gradient-gold: linear-gradient(45deg, #D4AF37 0%, #F0E68C 100%);
 @media (min-width: 700px) {
-  .header-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: center;
-    width: 100%;
-    padding-top: 2.5rem;
-    padding-bottom: 1.2rem;
-    background: #fff;
-    box-shadow: 0 2px 14px rgba(212, 175, 55, 0.07);
-  }
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  width: 100%;
+  padding-top: 2.5rem;
+  padding-bottom: 1.2rem;
+  background: rgba(255,255,255,0.85);         /* <--- semi-transparent! */
+  box-shadow: 0 6px 32px rgba(212,175,55,0.09); /* softer, more modern shadow */
+  backdrop-filter: blur(4px);                 /* <--- optional, modern glass effect */
+  -webkit-backdrop-filter: blur(4px);         /* Safari support */
+  transition: background 0.25s;
+}
 /* Only show hamburger on mobile */
 .hamburger-menu {
   display: none;
