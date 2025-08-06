@@ -1114,8 +1114,10 @@ function toggleLanguage() {
   currentLanguage = currentLanguage === 'mk' ? 'en' : 'mk';
   const elements = document.querySelectorAll('[data-mk][data-en], [data-placeholder-mk][data-placeholder-en], [data-mk-option][data-en-option]');
   const button = document.querySelector('.language-toggle');
-
-
+const gallerySeeMore = document.getElementById('gallery-see-more-btn');
+if (gallerySeeMore) {
+  gallerySeeMore.textContent = currentLanguage === 'mk' ? 'Види повеќе' : 'See more';
+}
   // For regular text elements and nav, etc.
   document.querySelectorAll('[data-mk][data-en]').forEach(element => {
     if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
