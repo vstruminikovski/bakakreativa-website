@@ -488,40 +488,157 @@
       .hero { margin-top: 110px; height: 80vh; }
       .hero-title { font-size: 2rem; }
       .hero-subtitle { font-size: 1rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .about-image { height: 300px; }
-      .about-stats { grid-template-columns: 1fr; }
-      .about-unique-title { font-size: 2rem; }
-      .about-features { grid-template-columns: 1fr; }
-      .service-grid { grid-template-columns: 1fr; }
-      .slideshow-btn.prev { left: 0.5rem; }
-      .slideshow-btn.next { right: 0.5rem; }
-      .slideshow-slide { height: 250px; }
-      .booking-form { padding: 0 0.75rem; }
-      .services-title, .gallery-title, .booking-title, .about-title { font-size: 2rem; }
-      
-      /* Ensure all sections fit properly */
-      .about, .services, .gallery, .booking {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-      }
-  }
+     /* Modern About section layout */
+.about-grid {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  max-width: 1150px;
+  margin: 0 auto 2.1rem auto;
+}
 
-  @media (max-width: 480px) {
-      .contact-info { 
-          grid-template-columns: 1fr 1fr; 
-          gap: 0.2rem; 
-          font-size: 0.65rem; 
-      }
-      .header-container { padding: 0.4rem 0.5rem; }
-      .logo { height: 2.16rem; } /* 1.8rem -> 2.16rem (20% increase) */
-      .tagline { font-size: 0.78rem; } /* 0.65rem -> 0.78rem (20% increase) */
-      .nav-links a { padding: 0.3rem 0.5rem; font-size: 0.75rem; }
-      .hero-title { font-size: 1.5rem; }
-      .about-unique-title { font-size: 1.5rem; }
-      .services-title, .gallery-title, .booking-title, .about-title { font-size: 1.5rem; }
-      .about-names { font-size: 1.5rem; }
-      .about-description { font-size: 1rem; }
+.about-image-container {
+  flex: 1 1 320px;
+  max-width: 340px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.about-image {
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 1.2rem;
+  box-shadow: 0 14px 28px rgba(150,135,55,0.08);
+  position: relative;
+  z-index: 2;
+}
+.about-decorative-circle-1,
+.about-decorative-circle-2 {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.19;
+  z-index: 1;
+}
+.about-decorative-circle-1 {
+  width: 108px;
+  height: 108px;
+  left: -42px;
+  top: 18%;
+  background: var(--color-gold, #d4af37);
+  filter: blur(1.5px);
+}
+.about-decorative-circle-2 {
+  width: 70px;
+  height: 70px;
+  right: -30px;
+  bottom: 13%;
+  background: #f7ecd0;
+}
+
+.about-content {
+  flex: 2 1 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.about-names {
+  font-size: 1.45rem;
+  color: var(--color-gold, #D4AF37);
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+.about-description, .about-story {
+  font-size: 1.13rem;
+  color: #3c3c3c;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+.about-stats {
+  display: flex;
+  gap: 1.6rem;
+  margin-top: 1.0rem;
+}
+.about-stat {
+  background: #fff;
+  border-radius: 0.9rem;
+  box-shadow: 0 4px 16px #d4af3733;
+  padding: 0.6rem 1.4rem 0.45rem 1.4rem;
+  text-align: center;
+  min-width: 100px;
+}
+.about-stat-number {
+  display: block;
+  font-size: 1.32rem;
+  font-weight: 700;
+  color: #ba9c3f;
+  margin-bottom: 0.17em;
+}
+.about-stat-label {
+  font-size: 0.95rem;
+  color: #6a6a6a;
+}
+
+.about-unique {
+  text-align: center;
+  margin: 1.7rem 0 1.3rem 0;
+}
+.about-unique-title {
+  font-size: 1.22rem;
+  color: var(--color-gold, #D4AF37);
+  font-weight: 700;
+  margin-bottom: 0.22rem;
+}
+.about-unique-description, .about-unique-subtitle {
+  color: #505050;
+  font-size: 1.06rem;
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+  max-width: 1050px;
+  margin: 0 auto;
+  margin-bottom: 1.2rem;
+}
+.about-feature {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px #d4af3714;
+  padding: 1.15rem 1rem 1.1rem 1rem;
+  text-align: center;
+}
+.about-feature-icon svg, .about-feature-icon img {
+  width: 44px; height: 44px; margin-bottom: 0.7em;
+  filter: drop-shadow(0 2px 8px #d4af3722);
+}
+.about-feature-title {
+  font-size: 1.12rem;
+  color: var(--color-gold, #D4AF37);
+  font-weight: 700;
+  margin-bottom: 0.16rem;
+}
+.about-feature-description {
+  font-size: 0.97rem;
+  color: #585858;
+}
+
+/* Responsive tweaks */
+@media (max-width: 950px) {
+  .about-grid { flex-direction: column; gap: 1.2rem; }
+  .about-image-container, .about-content { max-width: 100%; flex: 1 1 100%; }
+  .about-stats { gap: 1.0rem; justify-content: flex-start;}
+  .about-features { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 650px) {
+  .about-grid { flex-direction: column; gap: 0.7rem; }
+  .about-features { grid-template-columns: 1fr; gap: 1.1rem; }
+  .about-unique { margin: 1rem 0; }
+}
       
       /* Tighter padding for very small screens */
       .about, .services, .gallery, .booking {
