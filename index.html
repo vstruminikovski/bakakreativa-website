@@ -611,33 +611,6 @@ footer a{color:var(--color-gold);transition:color .3s;} footer a:hover{color:#b3
   from { opacity: 0; transform: translateY(-15px);}
   to   { opacity: 1; transform: translateY(0);}
 }
-  @keyframes fadeInMenu {
-  from { opacity: 0; transform: translateY(-15px);}
-  to   { opacity: 1; transform: translateY(0);}
-}
-
-/* ===== SBK: Secondary CTA inside service cards ===== */
-.service-actions{
-  display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-top:.4rem;
-}
-.service-cta{
-  display:inline-block;
-  padding:.5rem 1.1rem;
-  border-radius:9999px;
-  border:2px solid var(--color-gold, #D4AF37);
-  color: var(--color-gold, #D4AF37);
-  background:transparent;
-  font-weight:600;
-  transition:background .2s, color .2s, border-color .2s;
-  text-decoration:none;
-}
-.service-cta:hover{
-  background: var(--color-gold, #D4AF37);
-  color:#fff;
-  border-color: var(--color-gold, #D4AF37);
-}
-</style>
-
 </style>
 </head>
 
@@ -1072,43 +1045,14 @@ window.addEventListener('scroll', function() {
           const c = document.createElement('div');
           c.className = 'service-card';
           const buttonText = currentLanguage === 'mk' ? 'Резервирај' : 'Book Now';
-         const seeMoreText = currentLanguage === 'mk' ? 'Види повеќе' : 'See more';
-const serviceId = encodeURIComponent(s.title.split('.')[0].trim());
-
-c.innerHTML = `
-  <img class='service-image' src='${s.img}' alt=''>
-  <div class='service-content'>
-    <h3 class='service-title'>${s.title}</h3>
-    <p class='service-desc'>${s.desc}</p>
-    <div class="service-actions">
-      <a class='service-btn' href='#booking'>${buttonText}</a>
-      <a class='service-cta' href='media/index.html?service=${serviceId}' target='_self'>${seeMoreText}</a>
-    </div>
-  </div>
-`;
-
+          c.innerHTML = `<img class='service-image' src='${s.img}' alt=''><div class='service-content'><h3 class='service-title'>${s.title}</h3><p class='service-desc'>${s.desc}</p><a class='service-btn' href='#booking'>${buttonText}</a></div>`;
           grid.appendChild(c);
       });
   }
 
   // Initialize services and slideshow
   const servicesData=[{img:'images/DSC_0742 copy.jpg',title:'1. Свадби',desc:'Незаборавни моменти од вашиот најважен ден'},{img:'images/476274242_509301132201627_7563436296873345710_n.jpg',title:'2. Крштевки',desc:'Светли моменти од духовното славење'},{img:'images/481449499_527600347038372_7282178137399563395_n.jpg',title:'3. Родендени и забави',desc:'Радосни празнувања полни со смеа'},{img:'images/BAK_4080.JPG',title:'4. Корпоративни настани',desc:'Професионални моменти со стил'},{img:'images/DSC_2651.JPG',title:'5. Приватни фотосесии',desc:'Лична уметност и креативност'},{img:'images/480441997_517162151415525_5041905174948546160_n.jpg',title:'6. Спорт',desc:'Динамични моменти од спортските настани'},{img:'images/12312312 copy.png',title:'7. Музички настани',desc:'Енергија и страст во секој кадар'},{img:'images/121212.jpg',title:'8. Детски фотосесии',desc:'Невиност и радост во секој осмев'},{img:'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pexels-asphotograpy-212372.jpg-R6X4ackkIAQJyxgTVuNE4sjNfYEYow.jpeg',title:'9. Друго',desc:'Фотографија и видео за специјални барања'}];
-  const grid=document.querySelector('.service-grid');servicesData.forEach(s=>{const c=document.createElement('div');c.className='service-card';const buttonTextInit = 'Резервирај';
-const seeMoreTextInit = 'Види повеќе';
-const serviceIdInit = encodeURIComponent(s.title.split('.')[0].trim());
-
-c.innerHTML = `
-  <img class='service-image' src='${s.img}' alt=''>
-  <div class='service-content'>
-    <h3 class='service-title'>${s.title}</h3>
-    <p class='service-desc'>${s.desc}</p>
-    <div class="service-actions">
-      <a class='service-btn' href='#booking'>${buttonTextInit}</a>
-      <a class='service-cta' href='media/index.html?service=${serviceIdInit}' target='_self'>${seeMoreTextInit}</a>
-    </div>
-  </div>
-`;
-grid.appendChild(c);});
+  const grid=document.querySelector('.service-grid');servicesData.forEach(s=>{const c=document.createElement('div');c.className='service-card';c.innerHTML=`<img class='service-image' src='${s.img}' alt=''><div class='service-content'><h3 class='service-title'>${s.title}</h3><p class='service-desc'>${s.desc}</p><a class='service-btn' href='#booking'>Резервирај</a></div>`;grid.appendChild(c);});
   const images=['505444919_606448679153538_9042537740825313968_n.jpg','475969587_506700922461648_3106474446517222839_n.jpg','476230275_505121755952898_1455905859183553477_n.jpg','475799344_505505439247863_8710145677332244737_n.jpg','475919196_505640509234356_5417417088216181951_n.jpg','DSC_1912.jpg','DSC_2170.jpg'];
   const sc=document.querySelector('.slideshow-container'), prevBtn=document.querySelector('.slideshow-btn.prev'), nextBtn=document.querySelector('.slideshow-btn.next');
   images.forEach((img,i)=>{const el=document.createElement('img');el.src='images/'+img;el.className='slideshow-slide'+(i===0?' active':'');sc.insertBefore(el, sc.firstChild);});
