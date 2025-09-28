@@ -2,177 +2,20 @@
 <html lang="mk">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Медиа преглед</title>
-  <style>
-    :root{
-      --gold:#D4AF37; --char:#2E2E2E; --ivory:#F9F7F2; --pearl:#E8E6E1;
-    }
-    body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:var(--ivory); color:var(--char);}
-    header{ position:sticky; top:0; background:#fff; border-bottom:1px solid #eee; padding:0.8rem 1rem; z-index:10; }
-    .bar{ max-width:1100px; margin:0 auto; display:flex; gap:.8rem; align-items:center; justify-content:space-between; }
-    .title{ font-weight:800; letter-spacing:.3px; }
-    .crumb{ font-size:.95rem; opacity:.8; }
-    .btn-back{ text-decoration:none; border:2px solid var(--gold); color:var(--gold); padding:.4rem .8rem; border-radius:999px; font-weight:600; }
-    .btn-back:hover{ background:var(--gold); color:#fff; }
-    main{ max-width:1100px; margin:1rem auto; padding:0 1rem 2rem; }
-    .uploader{
-      border:2px dashed #d7c68e; background:var(--pearl);
-      border-radius:14px; padding:1.2rem; text-align:center;
-    }
-    .uploader.drag{ background:#fff7e0; border-color:var(--gold); }
-    .uploader input{ display:none; }
-    .uploader .actions{ display:flex; gap:.7rem; justify-content:center; flex-wrap:wrap; }
-    .pill{
-      display:inline-block; border:2px solid var(--gold); color:var(--gold);
-      padding:.5rem 1rem; border-radius:999px; cursor:pointer; font-weight:700; background:#fff;
-    }
-    .pill:hover{ background:var(--gold); color:#fff; }
-    .grid{ display:grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap:.8rem; margin-top:1rem; }
-    .card{
-      background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 6px 18px rgba(0,0,0,.07); cursor:pointer;
-      display:flex; align-items:center; justify-content:center; aspect-ratio:1/1; position:relative;
-    }
-    .card img, .card video{ width:100%; height:100%; object-fit:cover; }
-    .badge{ position:absolute; top:.45rem; left:.45rem; background:rgba(0,0,0,.6); color:#fff; font-size:.75rem; padding:.18rem .5rem; border-radius:999px; }
-    /* Viewer */
-    .viewer{ position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; align-items:center; justify-content:center; z-index:20; }
-    .viewer.open{ display:flex; }
-    .viewer-inner{ max-width:min(92vw,1100px); max-height:86vh; width:100%; }
-    .viewer img, .viewer video{ width:100%; height:auto; max-height:86vh; display:block; border-radius:12px; }
-    .viewer .close{ position:absolute; top:1rem; right:1rem; font-size:2rem; background:transparent; border:0; color:#fff; cursor:pointer; }
-    .hint{ font-size:.9rem; color:#666; margin-top:.4rem; }
-  </style>
+  <title>Пренасочување...</title>
+  <meta name="robots" content="noindex">
+  <!-- Брз fallback ако JS е исклучен (без query) -->
+  <meta http-equiv="refresh" content="0; url=/gallery/">
+  <script>
+    (function () {
+      // задржи query (?service=8) и hash ако постои
+      var target = '/gallery/' + (location.search || '') + (location.hash || '');
+      location.replace(target);
+    })();
+  </script>
+  <link rel="canonical" href="https://bakakreativa.com/gallery/">
 </head>
 <body>
-  <header>
-    <div class="bar">
-      <div>
-        <div class="title">Медија Преглед / Media Viewer</div>
-        <div class="crumb" id="crumb"></div>
-      </div>
-      <a class="btn-back" href="../index.html">← Назад / Back</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="uploader" id="drop">
-      <p><strong>Влечи и пушти</strong> фотографии/видеа тука, или</p>
-      <div class="actions">
-        <label class="pill">
-          📂 Одбери фајлови / Choose files
-          <input id="fileInput" type="file" accept="image/*,video/*" multiple>
-        </label>
-        <button class="pill" id="clearBtn" type="button">🧹 Исчисти / Clear</button>
-      </div>
-      <p class="hint">Поддржано: JPG, PNG, WebP, MP4, MOV, WEBM… (локално, не се качува на сервер)</p>
-    </section>
-
-    <section class="grid" id="grid"></section>
-  </main>
-
-  <div class="viewer" id="viewer" aria-hidden="true">
-    <button class="close" aria-label="Close viewer">&times;</button>
-    <div class="viewer-inner" id="viewerInner"></div>
-  </div>
-
-<script>
-(function(){
-  // Breadcrumb from ?service=…
-  const params = new URLSearchParams(location.search);
-  const service = params.get('service');
-  const crumb = document.getElementById('crumb');
-  if (service){
-    const map = {
-      '1':'Свадби / Weddings','2':'Крштевки / Baptisms','3':'Родендени / Birthdays',
-      '4':'Корпоративни / Corporate','5':'Приватни / Private shoots','6':'Спорт / Sports',
-      '7':'Музички / Music','8':'Детски / Children','9':'Друго / Other'
-    };
-    crumb.textContent = 'Категорија: ' + (map[service] || service);
-  }
-
-  const drop = document.getElementById('drop');
-  const input = document.getElementById('fileInput');
-  const grid = document.getElementById('grid');
-  const clearBtn = document.getElementById('clearBtn');
-  const viewer = document.getElementById('viewer');
-  const viewerInner = document.getElementById('viewerInner');
-
-  function filesToArray(list){
-    return Array.from(list || []).filter(f => /^image\/|^video\//.test(f.type));
-  }
-
-  function makeThumb(file){
-    const card = document.createElement('div');
-    card.className = 'card';
-    const url = URL.createObjectURL(file);
-    const isVideo = file.type.startsWith('video/');
-    let el;
-    if (isVideo){
-      el = document.createElement('video');
-      el.src = url; el.muted = true; el.playsInline = true; el.preload = 'metadata';
-    } else {
-      el = document.createElement('img');
-      el.src = url; el.loading = 'lazy';
-    }
-    const badge = document.createElement('div');
-    badge.className = 'badge';
-    badge.textContent = isVideo ? 'VIDEO' : 'PHOTO';
-
-    card.appendChild(el);
-    card.appendChild(badge);
-
-    card.addEventListener('click', () => openViewer(file, url, isVideo));
-    grid.appendChild(card);
-  }
-
-  function openViewer(file, url, isVideo){
-    viewerInner.innerHTML = '';
-    const el = document.createElement(isVideo ? 'video' : 'img');
-    el.src = url;
-    if (isVideo){
-      el.controls = true;
-      el.playsInline = true;
-    }
-    viewerInner.appendChild(el);
-    viewer.classList.add('open');
-    viewer.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeViewer(){
-    viewer.classList.remove('open');
-    viewer.setAttribute('aria-hidden','true');
-    viewerInner.innerHTML = '';
-    document.body.style.overflow = '';
-  }
-
-  // Drag & drop
-  ['dragenter','dragover'].forEach(ev => {
-    drop.addEventListener(ev, e => { e.preventDefault(); e.stopPropagation(); drop.classList.add('drag'); });
-  });
-  ['dragleave','drop'].forEach(ev => {
-    drop.addEventListener(ev, e => { e.preventDefault(); e.stopPropagation(); drop.classList.remove('drag'); });
-  });
-  drop.addEventListener('drop', e => {
-    const files = filesToArray(e.dataTransfer.files);
-    files.forEach(makeThumb);
-  });
-
-  input.addEventListener('change', e => {
-    const files = filesToArray(e.target.files);
-    files.forEach(makeThumb);
-    input.value = '';
-  });
-
-  clearBtn.addEventListener('click', () => { grid.innerHTML = ''; });
-
-  viewer.addEventListener('click', (e) => {
-    if (e.target === viewer) closeViewer();
-  });
-  viewer.querySelector('.close').addEventListener('click', closeViewer);
-  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeViewer(); });
-})();
-</script>
+  <p>Пренасочување кон галеријата… Ако не ве пренасочи, кликнете <a href="/gallery/">овде</a>.</p>
 </body>
 </html>
